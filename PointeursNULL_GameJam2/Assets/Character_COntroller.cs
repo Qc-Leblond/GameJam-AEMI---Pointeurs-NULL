@@ -5,6 +5,7 @@ public class Character_COntroller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//Test .log
 	
 	}
 	
