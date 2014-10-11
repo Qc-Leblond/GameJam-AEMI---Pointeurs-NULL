@@ -33,7 +33,7 @@ public class Game_Main : MonoBehaviour
 			Zombie.GetComponent<Character_Controller>().Move();
 		}
 		else if (RoundCount % 2 == 0)
-		{
+        {
 			Zombie.GetComponent<Character_Controller>().DontMove();
 			Human.GetComponent<Character_Controller>().Move();
 		}

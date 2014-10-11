@@ -18,10 +18,13 @@ public class Character_Controller : MonoBehaviour
 
     private bool Button1Down;
     private bool Button2Down;
+    private string ControllerActive;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        if (isHuman) ControllerActive = "P1_";
+        else ControllerActive = "P2_";
     }
 
     void Update()
