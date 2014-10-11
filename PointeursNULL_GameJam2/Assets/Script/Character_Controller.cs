@@ -30,21 +30,6 @@ public class Character_Controller : MonoBehaviour
         if (isHuman) ControllerActive = "P1_";
         else ControllerActive = "P2_";
 
-        if (isHuman)
-        {
-            horizontal = "P2Horizontal";
-            jump = "P2Jump";
-            powerUp1 = "P2PowerUp1";
-            powerUp2 = "P2PowerUp2";
-        }
-        else
-        {
-            horizontal = "Horizontal";
-            jump = "Jump";
-            powerUp1 = "PowerUp1";
-            powerUp2 = "PowerUp2";
-        }
-
     }
 
     void Update()
@@ -73,7 +58,7 @@ public class Character_Controller : MonoBehaviour
 			// We are grounded, so recalculate
 			// move direction directly from axes
             animator.SetBool("Jump", false);
-			moveDirection = new Vector3(Input.GetAxis(horizontal), 0, 0);
+			moveDirection = new Vector3(Input.GetAxis(ControllerActive + "horizontal"), 0, 0);
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= Speed;
 
