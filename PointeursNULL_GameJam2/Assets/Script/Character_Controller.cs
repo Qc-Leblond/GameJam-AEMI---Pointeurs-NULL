@@ -26,6 +26,9 @@ public class Character_Controller : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
+        if (isHuman) ControllerActive = "P1_";
+        else ControllerActive = "P2_";
 
         if (isHuman)
         {
@@ -87,8 +90,8 @@ public class Character_Controller : MonoBehaviour
 		Ymove -= Gravity * Time.deltaTime;
         moveDirection.y = Ymove;
         Controller.Move(moveDirection * Time.deltaTime);
-        if (!canMove)
-            moveDirection = new Vector3(0, 0, 0);
+        if(!canMove)
+            moveDirection = new Vector3(0,0,0);
     }
 
     void Triggers()
