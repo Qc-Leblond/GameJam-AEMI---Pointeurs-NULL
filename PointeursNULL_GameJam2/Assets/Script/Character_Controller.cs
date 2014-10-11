@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Character_Controller : MonoBehaviour
 {
-    private float Speed = 5f;
-    private float jumpSpeed = 10f;
+    private float Speed = 10f;
+    private float jumpSpeed = 15f;
     private float Gravity = 20f;
     
     CharacterController Controller;
