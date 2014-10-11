@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Character_Controller : MonoBehaviour
 {
+	public bool canMove;
     private float Speed = 10f;
     private float jumpSpeed = 15f;
     private float Gravity = 20f;
@@ -44,7 +45,7 @@ public class Character_Controller : MonoBehaviour
     void FixedUpdate()
     {
         Controller = GetComponent<CharacterController>();
-		if (Controller.isGrounded) 
+		if (Controller.isGrounded && canMove == true) 
         {
 			// We are grounded, so recalculate
 			// move direction directly from axes
@@ -63,8 +64,7 @@ public class Character_Controller : MonoBehaviour
                 Ymove = 0;
             }
 		}
-
-        Ymove -= Gravity * Time.deltaTime;
+		Ymove -= Gravity * Time.deltaTime;
         moveDirection.y = Ymove;
         Controller.Move(moveDirection * Time.deltaTime);
     }
@@ -100,4 +100,13 @@ public class Character_Controller : MonoBehaviour
             Debug.Log("Power Up 4");
         }
     }
+	public void Move()
+	{
+		canMove = true;
+	}
+
+	public void DontMove()
+	{
+		canMove = false;
+	}
 }
