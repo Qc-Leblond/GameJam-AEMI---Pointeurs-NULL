@@ -27,11 +27,22 @@ public class Game_Main : MonoBehaviour
 
     void Update()
     {
+		if (RoundCount % 2 == 0)
+		{
+			Zombie.GetComponent<Character_Controller>().DontMove();
+			Human.GetComponent<Character_Controller>().Move();
+		} 
+		else if (RoundCount % 2 == 1)
+		{
+			Human.GetComponent<Character_Controller>().DontMove();
+			Zombie.GetComponent<Character_Controller>().Move();
+		}
+
         if (NewRound)
         {
             NewRound = false;
             GetComponent<Timer>().NewTimer();
-        }
+		}
     }
 
     public void SpawnZombie()

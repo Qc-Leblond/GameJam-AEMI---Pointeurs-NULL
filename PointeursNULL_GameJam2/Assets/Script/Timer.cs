@@ -4,7 +4,7 @@ using System.Collections;
 public class Timer : MonoBehaviour {
     private bool TimerActive = false;
 	private float timeLeft;
-    private float timeStart = 20;
+    private float timeStart = 5;
 	private int ZPoints = 0;
 	private int HPoints = 0;
 

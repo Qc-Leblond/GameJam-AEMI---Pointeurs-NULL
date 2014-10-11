@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Character_Controller : MonoBehaviour
 {
+	public bool canMove;
     private float Speed = 10f;
     private float jumpSpeed = 15f;
     private float Gravity = 20f;
@@ -18,34 +19,30 @@ public class Character_Controller : MonoBehaviour
 
     void Update()
     {
-        DpadButton();
-        Triggers();
+			DpadButton ();
+			Triggers ();
     }
 
     void FixedUpdate()
     {
-        Controller = GetComponent<CharacterController>();
-		if (Controller.isGrounded) 
-        {
+			Controller = GetComponent<CharacterController> ();
+			if (Controller.isGrounded && canMove == true) {
 			// We are grounded, so recalculate
-			// move direction directly from axes
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-			moveDirection = transform.TransformDirection(moveDirection);
+		   // move direction directly from axes
+			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
+		    moveDirection = transform.TransformDirection (moveDirection);
 			moveDirection *= Speed;
-
-            if (Input.GetButton("Jump"))
-            {
-                Ymove = jumpSpeed;
-            }
-            else
-            {
-                Ymove = 0;
-            }
-		}
-
-        Ymove -= Gravity * Time.deltaTime;
-        moveDirection.y = Ymove;
-        Controller.Move(moveDirection * Time.deltaTime);
+			
+			
+			if (Input.GetButton ("Jump")) {
+				Ymove = jumpSpeed;
+				} else {
+						Ymove = 0;
+						}
+				}
+ 					Ymove -= Gravity * Time.deltaTime;
+					moveDirection.y = Ymove;
+					Controller.Move (moveDirection * Time.deltaTime);
     }
 
     void Triggers()
@@ -79,4 +76,13 @@ public class Character_Controller : MonoBehaviour
             Debug.Log("Power Up 4");
         }
     }
+
+	public void Move()
+	{
+		canMove = true;
+	}
+	public void DontMove()
+	{
+		canMove = false;
+	}
 }
