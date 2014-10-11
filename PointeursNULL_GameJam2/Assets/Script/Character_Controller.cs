@@ -49,14 +49,14 @@ public class Character_Controller : MonoBehaviour
         DpadButton();
         Triggers();
 
-        if (Input.GetAxis(horizontal) < 0)
+        if (Input.GetAxis(horizontal) < 0 && canMove)
             this.transform.localScale = (new Vector3(-5, 5, 1));
 
-        if (Input.GetAxis(horizontal) > 0)
+        if (Input.GetAxis(horizontal) > 0 && canMove)
             this.transform.localScale = (new Vector3(5, 5, 1));
 
 
-        if (Mathf.Abs(moveDirection.x) > 0.5f || Mathf.Abs(moveDirection.y) > 0.5f)
+        if ((Mathf.Abs(moveDirection.x) > 0.5f || Mathf.Abs(moveDirection.y) > 0.5f) && canMove)
             animator.SetFloat("Speed", Mathf.Sqrt((moveDirection.x*moveDirection.x)+(moveDirection.y*moveDirection.y)));
         else
             animator.SetFloat("Speed",0.0f);
@@ -74,7 +74,7 @@ public class Character_Controller : MonoBehaviour
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= Speed;
 
-            if (Input.GetButton(jump))
+            if (Input.GetButton(jump) && canMove)
             {
                 Ymove = jumpSpeed;
                 animator.SetBool("Jump", true);
@@ -87,6 +87,8 @@ public class Character_Controller : MonoBehaviour
 		Ymove -= Gravity * Time.deltaTime;
         moveDirection.y = Ymove;
         Controller.Move(moveDirection * Time.deltaTime);
+        if (!canMove)
+            moveDirection = new Vector3(0, 0, 0);
     }
 
     void Triggers()

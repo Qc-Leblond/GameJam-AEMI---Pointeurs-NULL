@@ -11,6 +11,7 @@ public class Game_Main : MonoBehaviour
     public GameObject Zombie;
     public GameObject Human;
     public GameObject Objective;
+    public GameObject camera;
 
     private List<GameObject> HumanList = new List<GameObject>();
     private List<GameObject> ZombieList = new List<GameObject>();
@@ -19,10 +20,14 @@ public class Game_Main : MonoBehaviour
     private int LimitZombie = 5;
     private int LimitHuman = 3;
 
+    private int activeZombie = 0;
+
     void Awake()
     {
         AddToRoundCount();
         PotentialObjectiveCoordinates();
+        SpawnZombie();
+
     }
 
     void Update()
@@ -35,6 +40,10 @@ public class Game_Main : MonoBehaviour
             {
                 SpawnZombie();
             }
+            if(Input.GetButtonDown("Change"))
+            {
+                ChangeControl();
+            }
 		}
 		else if (RoundCount % 2 == 0)
         {
@@ -44,6 +53,10 @@ public class Game_Main : MonoBehaviour
             {
                 SpawnHuman();
             }
+            /*if (Input.GetButtonDown("Change"))
+            {
+                ChangeControl();
+            }*/
 		}
 
         if (NewRound)
@@ -59,6 +72,7 @@ public class Game_Main : MonoBehaviour
         {
             GameObject ZombieObject = Instantiate(Zombie, new Vector3(-60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             ZombieList.Add(ZombieObject);
+                ChangeControl();
         }
         else Debug.Log("Zombie Limit!");
     }
@@ -90,5 +104,21 @@ public class Game_Main : MonoBehaviour
     private void PotentialObjectiveCoordinates()
     {
         ObjectiveLocation.Add(new Vector3(0,0,0));
+    }
+
+
+    private void ChangeControl()
+    {
+        Debug.Log(activeZombie.ToString());
+        if (activeZombie !=0)
+            ZombieList[activeZombie-1].GetComponent<Character_Controller>().canMove = false;
+        if (activeZombie >= (ZombieList.Count))
+            activeZombie = 0;
+        ZombieList[activeZombie].GetComponent<Character_Controller>().canMove = true;
+
+
+        camera.transform.parent = ZombieList[activeZombie].transform;
+        camera.transform.position = (ZombieList[activeZombie].transform.position + new Vector3(0,0.5f,-10));
+        activeZombie++;
     }
 }
