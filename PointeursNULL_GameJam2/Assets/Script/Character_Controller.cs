@@ -7,7 +7,9 @@ public class Character_Controller : MonoBehaviour
     private float Speed = 10f;
     private float jumpSpeed = 15f;
     private float Gravity = 20f;
-    
+
+    protected Animator animator;
+
     CharacterController Controller;
     private bool facingRight = true;
     Vector3 moveDirection = Vector3.zero;
@@ -17,10 +19,27 @@ public class Character_Controller : MonoBehaviour
     private bool Button1Down;
     private bool Button2Down;
 
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
-			DpadButton ();
-			Triggers ();
+        DpadButton();
+        Triggers();
+
+        if (Input.GetAxis("Horizontal") < 0)
+            this.transform.localScale = (new Vector3(-5, 5, 1));
+
+        if (Input.GetAxis("Horizontal") > 0)
+            this.transform.localScale = (new Vector3(5, 5, 1));
+
+
+        if (Mathf.Abs(moveDirection.x) > 0.5f || Mathf.Abs(moveDirection.y) > 0.5f)
+            animator.SetFloat("Speed", Mathf.Sqrt((moveDirection.x*moveDirection.x)+(moveDirection.y*moveDirection.y)));
+        else
+            animator.SetFloat("Speed",0.0f);
     }
 
     void FixedUpdate()
@@ -28,21 +47,26 @@ public class Character_Controller : MonoBehaviour
 			Controller = GetComponent<CharacterController> ();
 			if (Controller.isGrounded && canMove == true) {
 			// We are grounded, so recalculate
-		   // move direction directly from axes
-			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, 0);
-		    moveDirection = transform.TransformDirection (moveDirection);
+			// move direction directly from axes
+            animator.SetBool("Jump", false);
+			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= Speed;
-			
-			
-			if (Input.GetButton ("Jump")) {
-				Ymove = jumpSpeed;
-				} else {
-						Ymove = 0;
-						}
-				}
- 					Ymove -= Gravity * Time.deltaTime;
-					moveDirection.y = Ymove;
-					Controller.Move (moveDirection * Time.deltaTime);
+
+            if (Input.GetButton("Jump"))
+            {
+                Ymove = jumpSpeed;
+                animator.SetBool("Jump", true);
+            }
+            else
+            {
+                Ymove = 0;
+            }
+		}
+
+        Ymove -= Gravity * Time.deltaTime;
+        moveDirection.y = Ymove;
+        Controller.Move(moveDirection * Time.deltaTime);
     }
 
     void Triggers()
