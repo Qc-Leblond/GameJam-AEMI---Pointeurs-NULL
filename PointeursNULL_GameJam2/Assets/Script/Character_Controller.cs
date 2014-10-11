@@ -16,6 +16,12 @@ public class Character_Controller : MonoBehaviour
     private bool Button1Down;
     private bool Button2Down;
 
+    void Update()
+    {
+        DpadButton();
+        Triggers();
+    }
+
     void FixedUpdate()
     {
         Controller = GetComponent<CharacterController>();
@@ -42,6 +48,10 @@ public class Character_Controller : MonoBehaviour
         Controller.Move(moveDirection * Time.deltaTime);
     }
 
+    void Triggers()
+    {
+
+    }
 
     void DpadButton()
     {
