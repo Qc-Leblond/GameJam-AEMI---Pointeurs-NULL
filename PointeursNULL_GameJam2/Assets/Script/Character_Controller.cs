@@ -26,9 +26,6 @@ public class Character_Controller : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        if (isHuman) ControllerActive = "P1_";
-        else ControllerActive = "P2_";
 
         if (isHuman)
         {
