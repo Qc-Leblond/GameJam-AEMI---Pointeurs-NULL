@@ -29,10 +29,10 @@ public class Character_Controller : MonoBehaviour
         Triggers();
 
         if (Input.GetAxis("Horizontal") < 0)
-            this.transform.localScale = (new Vector3(-2, 2, 1));
+            this.transform.localScale = (new Vector3(-5, 5, 1));
 
         if (Input.GetAxis("Horizontal") > 0)
-            this.transform.localScale = (new Vector3(2, 2, 1));
+            this.transform.localScale = (new Vector3(5, 5, 1));
 
 
         if (Mathf.Abs(moveDirection.x) > 0.5f || Mathf.Abs(moveDirection.y) > 0.5f)
@@ -48,6 +48,7 @@ public class Character_Controller : MonoBehaviour
         {
 			// We are grounded, so recalculate
 			// move direction directly from axes
+            animator.SetBool("Jump", false);
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= Speed;
@@ -55,6 +56,7 @@ public class Character_Controller : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 Ymove = jumpSpeed;
+                animator.SetBool("Jump", true);
             }
             else
             {
