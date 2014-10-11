@@ -31,11 +31,19 @@ public class Game_Main : MonoBehaviour
 		{
 			Human.GetComponent<Character_Controller>().DontMove();
 			Zombie.GetComponent<Character_Controller>().Move();
+            if (Input.GetButtonDown("Spawn"))
+            {
+                SpawnZombie();
+            }
 		}
 		else if (RoundCount % 2 == 0)
 		{
 			Zombie.GetComponent<Character_Controller>().DontMove();
 			Human.GetComponent<Character_Controller>().Move();
+            if(Input.GetButtonDown("P2Spawn"))
+            {
+                SpawnHuman();
+            }
 		}
 
         if (NewRound)
@@ -49,7 +57,7 @@ public class Game_Main : MonoBehaviour
     {
         if (LimitZombie >= ZombieList.Count)
         {
-            GameObject ZombieObject = Instantiate(Zombie, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+            GameObject ZombieObject = Instantiate(Zombie, new Vector3(-60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             ZombieList.Add(ZombieObject);
         }
         else Debug.Log("Zombie Limit!");
