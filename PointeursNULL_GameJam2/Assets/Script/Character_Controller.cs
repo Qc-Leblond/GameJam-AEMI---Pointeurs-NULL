@@ -4,49 +4,44 @@ using System.Collections;
 public class Character_Controller : MonoBehaviour
 {
     private float Speed = 5f;
-    private float jumpSpeed = 8f;
-    private float gravity = 20f;
+    private float jumpSpeed = 10f;
+    private float Gravity = 20f;
+    
+    CharacterController Controller;
+    private bool facingRight = true;
+    Vector3 moveDirection = Vector3.zero;
+    private float Ymove;
 
-    private Transform GroundCheck;
-    private bool onGround;
-    private float groundCheckRadius = 0.1f;
 
     private bool Button1Down;
     private bool Button2Down;
 
-    private Vector3 moveDirection = Vector3.zero;
-
-    void Awake()
+    void FixedUpdate()
     {
-        GroundCheck = transform.FindChild("GroundCheck");
-    }
-
-    void Update()
-    {
-        CharacterController Controller = GetComponent<CharacterController>();
-
-        if (Controller.isGrounded)
+        Controller = GetComponent<CharacterController>();
+		if (Controller.isGrounded) 
         {
-
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= Speed;
+			// We are grounded, so recalculate
+			// move direction directly from axes
+			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+			moveDirection = transform.TransformDirection(moveDirection);
+			moveDirection *= Speed;
 
             if (Input.GetButton("Jump"))
             {
-                moveDirection.y = jumpSpeed;
+                Ymove = jumpSpeed;
             }
-        }
+            else
+            {
+                Ymove = 0;
+            }
+		}
 
-        moveDirection.y -= gravity * Time.deltaTime;
+        Ymove -= Gravity * Time.deltaTime;
+        moveDirection.y = Ymove;
         Controller.Move(moveDirection * Time.deltaTime);
     }
 
-    void Mouvement(bool onGround)
-    {
-
-
-    }
 
     void DpadButton()
     {
