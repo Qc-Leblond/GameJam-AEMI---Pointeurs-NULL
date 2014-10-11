@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Character_Controller : MonoBehaviour 
 {
-    private float Speed = 5f;
-    private float jumpSpeed = 8f;
-    private float gravity = 20f;
+    private float SpeedForce;
+    private float MaxSpeed;
+    private float JumpForce;
 
     private Transform GroundCheck;
     private bool onGround;
@@ -14,38 +14,38 @@ public class Character_Controller : MonoBehaviour
     private bool Button1Down;
     private bool Button2Down;
 
-    private Vector3 moveDirection = Vector3.zero;
-
     void Awake()
     {
+        SpeedForce = 300f;
+        MaxSpeed = 5f;
+        JumpForce = 10000f;
+
         GroundCheck = transform.FindChild("GroundCheck");
+    }
+
+    void FixedUpdate()
+    {
+        float h = Input.GetAxis("Horizontal");
+
+        Mouvement(h);
     }
 
     void Update()
     {
-        CharacterController Controller = GetComponent<CharacterController>();
+        onGround = Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, 1 << LayerMask.NameToLayer("Platform"));
 
-        if (Controller.isGrounded) 
+        if (Input.GetButtonDown("Jump") && onGround)
         {
-
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0,0);
-			moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection *= Speed;
-			
-			if (Input.GetButton ("Jump")) 
-            {
-				moveDirection.y = jumpSpeed;
-			}
-		}
-
-		moveDirection.y -= gravity * Time.deltaTime;
-		Controller.Move(moveDirection * Time.deltaTime);
+            rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+        }
     }
 
-    void Mouvement(bool onGround)
+    void Mouvement(float h)
     {
-
-              
+        if (rigidbody2D.velocity.x < MaxSpeed)
+        {
+            
+        }
     }
 
     void DpadButton()
