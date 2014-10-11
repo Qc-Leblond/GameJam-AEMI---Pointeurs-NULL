@@ -7,7 +7,7 @@ public class Character_Controller : MonoBehaviour
     private float Speed = 10f;
     private float jumpSpeed = 15f;
     private float Gravity = 20f;
-
+    public bool isHuman;
     protected Animator animator;
 
     CharacterController Controller;
@@ -15,6 +15,10 @@ public class Character_Controller : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     private float Ymove;
 
+    private string horizontal;
+    private string jump;
+    private string powerUp1;
+    private string powerUp2;
 
     private bool Button1Down;
     private bool Button2Down;
@@ -25,6 +29,22 @@ public class Character_Controller : MonoBehaviour
         animator = GetComponent<Animator>();
         if (isHuman) ControllerActive = "P1_";
         else ControllerActive = "P2_";
+
+        if (isHuman)
+        {
+            horizontal = "P2Horizontal";
+            jump = "P2Jump";
+            powerUp1 = "P2PowerUp1";
+            powerUp2 = "P2PowerUp2";
+        }
+        else
+        {
+            horizontal = "Horizontal";
+            jump = "Jump";
+            powerUp1 = "PowerUp1";
+            powerUp2 = "PowerUp2";
+        }
+
     }
 
     void Update()
@@ -32,10 +52,10 @@ public class Character_Controller : MonoBehaviour
         DpadButton();
         Triggers();
 
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetAxis(horizontal) < 0)
             this.transform.localScale = (new Vector3(-5, 5, 1));
 
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetAxis(horizontal) > 0)
             this.transform.localScale = (new Vector3(5, 5, 1));
 
 
@@ -53,11 +73,11 @@ public class Character_Controller : MonoBehaviour
 			// We are grounded, so recalculate
 			// move direction directly from axes
             animator.SetBool("Jump", false);
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+			moveDirection = new Vector3(Input.GetAxis(horizontal), 0, 0);
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= Speed;
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton(jump))
             {
                 Ymove = jumpSpeed;
                 animator.SetBool("Jump", true);
@@ -79,30 +99,18 @@ public class Character_Controller : MonoBehaviour
 
     void DpadButton()
     {
-        if (Input.GetAxis("PowerUp1") == 0) Button1Down = false;
-        else if (Input.GetAxis("PowerUp1") == 1 && !Button1Down)
-        {
-            Button1Down = true;
-            Debug.Log("Power Up 1");
-        }
-        else if (Input.GetAxis("PowerUp1") == -1 && !Button1Down)
-        {
-            Button1Down = true;
-            Debug.Log("Power Up 2");
-        }
+        if (Input.GetAxis(powerUp1) < 0)
+            Debug.Log("PowerUp 1");
+        else if (Input.GetAxis(powerUp1) > 0)
+            Debug.Log("PowerUp 4");
 
-        if (Input.GetAxis("PowerUp2") == 0) Button2Down = false;
-        else if (Input.GetAxis("PowerUp2") == 1 && !Button2Down)
-        {
-            Button2Down = true;
-            Debug.Log("Power Up 3");
-        }
-        else if (Input.GetAxis("PowerUp2") == -1 && !Button2Down)
-        {
-            Button2Down = true;
-            Debug.Log("Power Up 4");
-        }
+        if (Input.GetAxis(powerUp2) < 0)
+            Debug.Log("PowerUp 2");
+        else if (Input.GetAxis(powerUp2) > 0)
+            Debug.Log("PowerUp 3");
+
     }
+
 	public void Move()
 	{
 		canMove = true;
