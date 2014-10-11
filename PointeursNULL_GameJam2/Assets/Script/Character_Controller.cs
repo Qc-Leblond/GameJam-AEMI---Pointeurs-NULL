@@ -16,23 +16,40 @@ public class Character_Controller : MonoBehaviour
 
     void Awake()
     {
-        SpeedForce = 250f;
+        SpeedForce = 300f;
         MaxSpeed = 5f;
         JumpForce = 10000f;
 
         GroundCheck = transform.FindChild("GroundCheck");
     }
 
+    void FixedUpdate()
+    {
+        float h = Input.GetAxis("Horizontal");
+
+        Mouvement(h);
+    }
+
     void Update()
     {
         onGround = Physics2D.OverlapCircle(GroundCheck.position, groundCheckRadius, 1 << LayerMask.NameToLayer("Platform"));
-        float h = Input.GetAxis("Horizontal");
 
+        if (Input.GetButtonDown("Jump") && onGround)
+        {
+            rigidbody2D.AddForce(new Vector2(0f, JumpForce));
+        }
+    }
+
+    void Mouvement(float h)
+    {
         if (rigidbody2D.velocity.x < MaxSpeed)
         {
-            rigidbody2D.AddForce(new Vector2(SpeedForce * h, 0f));
+            
         }
+    }
 
+    void DpadButton()
+    {
         if (Input.GetAxis("PowerUp1") == 0) Button1Down = false;
         else if (Input.GetAxis("PowerUp1") == 1 && !Button1Down)
         {
@@ -57,13 +74,4 @@ public class Character_Controller : MonoBehaviour
             Debug.Log("Power Up 4");
         }
     }
-
-    void FixedUpdate()
-    {
-        if (Input.GetButtonDown("Jump") && onGround)
-        {
-            rigidbody2D.AddForce(new Vector2(0f, JumpForce));
-        }
-    }
-
 }
