@@ -31,6 +31,7 @@ public class Human_Handling : MonoBehaviour
     public void RemoveTurnToZombie() { TurnToZombie -= 1; }
 	public void FuckOffIncapacitated()
 	{
+        TurnToZombie = 2;
 		Incapacitated = false;
         anim.SetBool("Infected", false);
 		transform.parent = null;
