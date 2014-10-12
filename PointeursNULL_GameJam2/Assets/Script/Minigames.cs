@@ -113,6 +113,7 @@ public class Minigames : MonoBehaviour
 			else if ((InputZombie) % 3 + 1 == InputHumain)
 			{
 				HumainGagne = true;
+                GameObject.FindGameObjectWithTag("Zombie").transform.GetChild(1).parent = null;
                 Destroy(GameObject.FindGameObjectWithTag("Zombie"));
                 HumainGagne = false;
 				StartGame = false;

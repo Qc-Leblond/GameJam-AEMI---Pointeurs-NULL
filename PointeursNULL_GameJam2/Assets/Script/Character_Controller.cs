@@ -143,6 +143,8 @@ public class Character_Controller : MonoBehaviour
                 this.DontMove();
         }
         
+        
+
 
         float move = Input.GetAxis(horizontal);
         if(canMove)
