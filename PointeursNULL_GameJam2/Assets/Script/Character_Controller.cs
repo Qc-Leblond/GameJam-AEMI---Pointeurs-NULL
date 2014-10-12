@@ -5,7 +5,7 @@ public class Character_Controller : MonoBehaviour
 {
 	public bool canMove;
     private float maxSpeed = 10f;
-    private float jumpSpeed = 1000f;
+    private float jumpSpeed = 1500f;
     private float Gravity = 20f;
     public bool isHuman;
     protected Animator animator;

@@ -150,15 +150,15 @@ public class Game_Main : MonoBehaviour
     {
         ObjectiveLocation.Add(new Vector3(0, 1, 0));
         //ObjectiveLocation.Add(new Vector3(0, 27.5f, 0));
-        ObjectiveLocation.Add(new Vector3(-16, 21, 0));
-        ObjectiveLocation.Add(new Vector3(16, 21, 0));
-        ObjectiveLocation.Add(new Vector3(16, 51, 0));
-        ObjectiveLocation.Add(new Vector3(-16, 51, 0));
-        ObjectiveLocation.Add(new Vector3(0, 36, 0));
-        ObjectiveLocation.Add(new Vector3(48, 51, 0));
-        ObjectiveLocation.Add(new Vector3(-48, 51, 0));
-        ObjectiveLocation.Add(new Vector3(-32, 36, 0));
-        ObjectiveLocation.Add(new Vector3(32, 36, 0));
+        ObjectiveLocation.Add(new Vector3(-24, 41, 0));
+        ObjectiveLocation.Add(new Vector3(24, 41, 0));
+        ObjectiveLocation.Add(new Vector3(24, 101, 0));
+        ObjectiveLocation.Add(new Vector3(-24, 101, 0));
+        ObjectiveLocation.Add(new Vector3(0, 71, 0));
+        ObjectiveLocation.Add(new Vector3(72, 101, 0));
+        ObjectiveLocation.Add(new Vector3(-72, 101, 0));
+        ObjectiveLocation.Add(new Vector3(-48, 71, 0));
+        ObjectiveLocation.Add(new Vector3(48, 71, 0));
 
 
     }
