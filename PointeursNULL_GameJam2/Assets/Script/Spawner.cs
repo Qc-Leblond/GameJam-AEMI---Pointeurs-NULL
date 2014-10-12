@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour {
             Destroy(collide.transform.GetChild(2).gameObject);
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().GiveZPoints();
             Debug.Log(GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().ZPoints);
-            
+
         }
     }
 }

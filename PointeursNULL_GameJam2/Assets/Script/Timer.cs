@@ -9,6 +9,9 @@ public class Timer : MonoBehaviour
 	public int ZPoints = 0;
 	public int HPoints = 0;
 
+    public Font fontName;
+    public Font fontForRest;
+
 	void Update ()
 	{
         if (TimerActive)
@@ -18,18 +21,26 @@ public class Timer : MonoBehaviour
             {
                 GetComponent<Game_Main>().AddToRoundCount();
                 TimerActive = false;
+                GetComponent<Game_Main>().ForNextRound();
             }
         }
 	}
 
 	void OnGUI ()
 	{
+        GUIStyle StyleName = new GUIStyle();
+        GUIStyle StyleForRest = new GUIStyle();
+        StyleName.font = fontName;
+        StyleForRest.font = fontForRest;
+        StyleName.font.material.color = Color.white;
+        StyleForRest.font.material.color = Color.white;
+
         if (TimerActive)
         {
-            GUI.Box(new Rect((Screen.width / 2) - 30, 50, 60, 50), "Temps \n" + ((int)timeLeft));
+            GUI.Box(new Rect((Screen.width / 2) - 30, 50, 60, 50), "Temps " + ((int)timeLeft), StyleForRest);
         }
-		GUI.Label (new Rect (100, Screen.height - 100, 50, 50), "Score \n"+ZPoints.ToString());
-		GUI.Label (new Rect (Screen.width - 100, Screen.height-100, 50, 50), "Score \n"+HPoints.ToString ());
+        GUI.Label(new Rect(100, Screen.height - 100, 50, 50), "Score " + ZPoints.ToString(), StyleForRest);
+        GUI.Label(new Rect(Screen.width - 100, Screen.height - 100, 50, 50), "Score " + HPoints.ToString(), StyleForRest);
 	}
 
     public void NewTimer()
