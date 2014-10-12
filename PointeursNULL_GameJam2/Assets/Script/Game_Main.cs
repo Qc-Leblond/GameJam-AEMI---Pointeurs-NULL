@@ -183,4 +183,25 @@ public class Game_Main : MonoBehaviour
         camera.transform.position = (HumanList[activeHuman].transform.position + new Vector3(0, 0.5f, -10));
         activeHuman++;
     }
+
+    public void ZombieDeath(GameObject Zombie)
+    {
+        ZombieList.Remove(Zombie);
+        Destroy(Zombie);
+    }
+
+    public void HumanDeath(GameObject Human)
+    {
+        HumanList.Remove(Human);
+        Destroy(Human);
+    }
+
+    public void HumanTransform(GameObject Human)
+    {
+        HumanList.Remove(Human);
+        Vector3 Pos = Human.transform.position;
+        Destroy(Human);
+        GameObject NewZombie = Instantiate(Zombie, Pos, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+        ZombieList.Add(NewZombie);
+    }
 }
