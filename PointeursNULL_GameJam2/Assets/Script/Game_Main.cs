@@ -30,12 +30,10 @@ public class Game_Main : MonoBehaviour
     private int activeZombie = 0;
     private int activeHuman = 0;
 
-<<<<<<< HEAD
     private bool BetweenRound = true;
     private float TimeBetweenRound = 3f;
     private float NextRound = 0f;
 
-=======
 	private AudioClip zwin;
 
 
@@ -44,7 +42,6 @@ public class Game_Main : MonoBehaviour
 	  		this.gameObject.AddComponent("zwin");
 			audio.clip = zwin;
 			audio.Play(); */
->>>>>>> origin/master2
 
     void Awake()
     {
