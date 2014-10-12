@@ -29,6 +29,9 @@ public class Character_Controller : MonoBehaviour
 
     
     public LayerMask ground;
+    public LayerMask zombie;
+    public LayerMask humain;
+
 
     [SerializeField]
     bool grounded = false;
@@ -126,7 +129,20 @@ public class Character_Controller : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
         animator.SetBool("Jump", grounded);
 
-
+        if (!isHuman)
+        {
+            GameObject.FindGameObjectWithTag("Minigames").GetComponent<Minigames>().StartGame = Physics2D.OverlapCircle(transform.position, 8f, humain);
+            if (Physics2D.OverlapCircle(transform.position, 8f, humain))
+                this.DontMove();
+            
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Minigames").GetComponent<Minigames>().StartGame = Physics2D.OverlapCircle(transform.position, 8f, zombie);
+            if (Physics2D.OverlapCircle(transform.position, 8f, zombie))
+                this.DontMove();
+        }
+        
 
         float move = Input.GetAxis(horizontal);
         if(canMove)

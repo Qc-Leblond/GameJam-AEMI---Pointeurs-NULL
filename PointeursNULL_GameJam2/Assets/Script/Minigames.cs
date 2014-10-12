@@ -102,6 +102,7 @@ public class Minigames : MonoBehaviour
 					break;
 				}
 			}
+<<<<<<< HEAD
 		}
 		
 		if ((InputHumain) % 3 + 1 == InputZombie)
@@ -113,6 +114,30 @@ public class Minigames : MonoBehaviour
 		{
 			HumainGagne = true;
 			StartGame = false;
+=======
+			
+			if ((InputHumain) % 3 + 1 == InputZombie)
+			{
+				ZombieGagne = true;
+                GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
+				GO = false;
+			}
+			else if ((InputZombie) % 3 + 1 == InputHumain)
+			{
+				HumainGagne = true;
+                Destroy(GameObject.FindGameObjectWithTag("Zombie"));
+                HumainGagne = false;
+				GO = false;
+			}
+
+			if (InputHumain == InputZombie)
+			{
+				//BUG!!!
+				InputZombie = -1; InputHumain = -10;
+				ZombieAJoue = false; HumainAJoue = false;
+				RPCZombie = " "; RPCHumain = " ";
+			}
+>>>>>>> origin/master2
 		}
 	}
 	
