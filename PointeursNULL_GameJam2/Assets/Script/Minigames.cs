@@ -25,7 +25,7 @@ public class Minigames : MonoBehaviour
 		{
 			GO = true;
 			spriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
-			Jeu = Random.Range (1, 3); 
+			Jeu = 2; 
 			
 			if (Jeu == 1) 
 			{
@@ -36,7 +36,7 @@ public class Minigames : MonoBehaviour
 
 		if (GO == true)
 		{
-			if(Jeu == 1)
+	/*		if(Jeu == 1)
 			{
 				switch (Chiffre) 
 				{
@@ -69,7 +69,7 @@ public class Minigames : MonoBehaviour
 						HumainAJoue = HumainGagne = true; GO = false;
 					break;
 				}
-			}
+			}  */
 			if(Jeu == 2)
 			{
 				if(ZombieAJoue == false)
