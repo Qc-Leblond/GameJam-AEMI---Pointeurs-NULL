@@ -32,6 +32,7 @@ public class Game_Main : MonoBehaviour
         PotentialObjectiveCoordinates();
         SpawnHuman();
         SpawnZombie();
+        SpawnObjective();
 
     }
 
@@ -73,11 +74,6 @@ public class Game_Main : MonoBehaviour
 
         if (NewRound)
         {
-            
-            Debug.Log(ObjectiveLimit.ToString());
-            for (int i = 0; i < objectiveList.Count;i++)
-                Destroy(objectiveList[i]);
-            SpawnObjective();
             if (RoundCount%2 == 0)
             {
                 activeHuman = 0;
