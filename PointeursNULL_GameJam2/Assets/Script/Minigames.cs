@@ -14,7 +14,7 @@ public class Minigames : MonoBehaviour
 	public string RPCHumain, 
 				  RPCZombie ;
 
-	public GUIText Texte;
+	//public GUIText Texte;
 	
 	void Test()
 	{
@@ -25,7 +25,7 @@ public class Minigames : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		Texte.text = "                  Roche Papier Ciseaux\n  Appuyez sur Carré pour séléctionner Roche,\n appuyez sur Triangle pour séléctionner Papier\net appuyez sur Cercle pour séléctionner Ciseaux";
+		//Texte.text = "                  Roche Papier Ciseaux\n  Appuyez sur Carré pour séléctionner Roche,\n appuyez sur Triangle pour séléctionner Papier\net appuyez sur Cercle pour séléctionner Ciseaux";
 		if (StartGame == true)
 		{
 			if(ZombieAJoue == false)
@@ -102,52 +102,33 @@ public class Minigames : MonoBehaviour
 					break;
 				}
 			}
-<<<<<<< HEAD
 		}
-		
-		if ((InputHumain) % 3 + 1 == InputZombie)
-		{
-			ZombieGagne = true;
-			StartGame = false;
-		}
-		else if ((InputZombie) % 3 + 1 == InputHumain)
-		{
-			HumainGagne = true;
-			StartGame = false;
-=======
 			
 			if ((InputHumain) % 3 + 1 == InputZombie)
 			{
 				ZombieGagne = true;
                 GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
-				GO = false;
+				StartGame = false;
 			}
 			else if ((InputZombie) % 3 + 1 == InputHumain)
 			{
 				HumainGagne = true;
                 Destroy(GameObject.FindGameObjectWithTag("Zombie"));
                 HumainGagne = false;
-				GO = false;
+				StartGame = false;
 			}
-
-			if (InputHumain == InputZombie)
-			{
-				//BUG!!!
-				InputZombie = -1; InputHumain = -10;
-				ZombieAJoue = false; HumainAJoue = false;
-				RPCZombie = " "; RPCHumain = " ";
-			}
->>>>>>> origin/master2
-		}
 	}
 	
 	void OnGUI()
 	{
-		GUI.Box (new Rect ((Screen.width / 2) - 100, 100, 60, 60), "Zombie\n\n" + RPCZombie);
-		GUI.Box (new Rect ((Screen.width / 2) + 40, 100, 60, 60), "Humain\n\n" + RPCHumain);
-		if (ZombieGagne == true)
-			GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Zombie\n\n" + "gagne!");
-		else if (HumainGagne == true)
-			GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Humain\n\n" + "gagne!");
+		if(StartGame == true)
+		{
+			GUI.Box (new Rect ((Screen.width / 2) - 100, 100, 60, 60), "Zombie\n\n" + RPCZombie);
+			GUI.Box (new Rect ((Screen.width / 2) + 40, 100, 60, 60), "Humain\n\n" + RPCHumain);
+			if (ZombieGagne == true)
+				GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Zombie\n\n" + "gagne!");
+			else if (HumainGagne == true)
+				GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Humain\n\n" + "gagne!");
+		}
 	}
 }
