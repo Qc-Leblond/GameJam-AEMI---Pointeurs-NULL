@@ -26,11 +26,19 @@ public class Character_Controller : MonoBehaviour
     private bool Button2Down;
     private string ControllerActive;
 
-
+    public bool fighting = false;
     
     public LayerMask ground;
     public LayerMask zombie;
     public LayerMask humain;
+
+    int ZombieInput = -1;
+    int HumanInput = -1;
+    bool ZombieAJoue = false;
+    bool HumanAJoue = false;
+
+    GameObject zombieObj;
+    GameObject humanObj;
 
 
     [SerializeField]
@@ -71,7 +79,6 @@ public class Character_Controller : MonoBehaviour
     void Update()
     {
         DpadButton();
-        Triggers();
 
       /*  if (Input.GetAxis(horizontal) < 0 && canMove)
             this.transform.localScale = (new Vector3(-5, 5, 1));
@@ -91,6 +98,22 @@ public class Character_Controller : MonoBehaviour
             rigidbody2D.AddForce(new Vector2(0, jumpSpeed));
         }
 
+        if(fighting)
+        {
+            Fight();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().TimerActive = false;
+
+
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().TimerActive = true;
+        }
+
+        if(gameObject.layer == 12 && GetComponent<Human_Handling>().Incapacitated && grounded)
+        {
+            gameObject.rigidbody2D.isKinematic = true;
+        }
 
         if (transportObjective)
         {
@@ -129,22 +152,7 @@ public class Character_Controller : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
         animator.SetBool("Jump", grounded);
 
-        if (!isHuman)
-        {
-            if(Physics2D.OverlapCircle(transform.position, 8f, humain))
-            {
-            
-                DontMove();
-            }
-                
-            
-        }
-        else
-        {
-            GameObject.FindGameObjectWithTag("Minigames").GetComponent<Minigames>().StartGame = Physics2D.OverlapCircle(transform.position, 8f, zombie);
-            if (Physics2D.OverlapCircle(transform.position, 8f, zombie))
-                this.DontMove();
-        }
+
         
         
 
@@ -162,6 +170,18 @@ public class Character_Controller : MonoBehaviour
         
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(gameObject.layer ==11 && other.gameObject.layer == 12)
+        {
+            fighting = true;
+            zombieObj = this.gameObject;
+            humanObj = other.gameObject;
+        }
+    }
+
+
+
     void flip()
     {
         facingRight = !facingRight;
@@ -170,11 +190,6 @@ public class Character_Controller : MonoBehaviour
         transform.localScale = scaling;
     }
 
-
-    void Triggers()
-    {
-
-    }
 
     void DpadButton()
     {
@@ -199,4 +214,111 @@ public class Character_Controller : MonoBehaviour
 	{
 		canMove = false;
 	}
+
+
+    void Fight()
+    {
+        DontMove();
+
+        if (!ZombieAJoue)
+        {
+            if (Input.GetButton("Roche"))
+            {
+                Debug.Log("ZR");
+                ZombieInput = 1;
+                ZombieAJoue = true;
+            //    RPCZombie = "Pret";
+            }
+            else if (Input.GetButton("Papier"))
+            {
+                Debug.Log("ZP");
+
+                ZombieInput = 2;
+                ZombieAJoue = true;
+            //    RPCZombie = "Pret";
+            }
+            if (Input.GetButton("Ciseaux"))
+            {
+                Debug.Log("ZC");
+
+                ZombieInput = 3;
+                ZombieAJoue = true;
+             //   RPCZombie = "Pret";
+            }
+        }
+        if (!HumanAJoue)
+        {
+            if (Input.GetButtonDown("P2Roche"))
+            {
+                Debug.Log("HR");
+
+                HumanInput = 1;
+                HumanAJoue = true;
+              //  RPCHumain = "Pret";
+            }
+            else if (Input.GetButtonDown("P2Papier"))
+            {
+                Debug.Log("HP");
+
+                HumanInput = 2;
+                HumanAJoue = true;
+                //RPCHumain = "Pret";
+            }
+            if (Input.GetButtonDown("P2Ciseaux"))
+            {
+                Debug.Log("HC");
+
+                HumanInput = 3;
+                HumanAJoue = true;
+                //RPCHumain = "Pret";
+            }
+        }
+        if (ZombieAJoue && HumanAJoue)
+        {
+            if ((HumanInput) % 3 + 1 == ZombieInput)
+            {
+                Debug.Log("ZG");
+                //ZombieGagne = true;
+                zombieObj.GetComponent<Character_Controller>().Move();
+                //GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
+                //Debug.Log(humanObj.transform.GetChild(1).name);
+                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent = humanObj.transform)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
+                }
+                humanObj.GetComponent<Human_Handling>().GetBitten();
+                Debug.Log(humanObj.GetComponent<Human_Handling>().Incapacitated);
+
+                fighting = false;
+            }
+            else if ((ZombieInput) % 3 + 1 == HumanInput)
+            {
+                Debug.Log("HG");
+
+                //HumainGagne = true;
+                humanObj.GetComponent<Character_Controller>().Move();
+
+                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent = zombieObj.transform)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
+                }
+                Destroy(zombieObj);
+                //Destroy(GameObject.FindGameObjectWithTag("Zombie"));
+                fighting = false;
+
+            }
+            else
+            {
+                ZombieInput = -1; ZombieAJoue = false;
+                HumanInput = -1; HumanAJoue = false;
+                //RPCHuman = "Draw";
+                //RPCZombie = "Draw";
+            }
+            if(!fighting)
+            {
+                ZombieInput = -1; ZombieAJoue = false;
+                HumanInput = -1; HumanAJoue = false;
+            }
+        }
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Human_Handling : MonoBehaviour
 {
-    private bool Incapacitated = false;
+    public bool Incapacitated = false;
     private int TurnToZombie;
     public GameObject Main;
     public Animator anim;
@@ -24,9 +24,8 @@ public class Human_Handling : MonoBehaviour
 
     public void GetBitten() 
     { 
-        Incapacitated = true;
+        this.Incapacitated = true;
         anim.SetBool("Infected", true);
-        GetComponent<Collider2D>().isTrigger = true;
     }
     public bool isIncapacitated() { return Incapacitated; }
     public void RemoveTurnToZombie() { TurnToZombie -= 1; }

@@ -194,17 +194,19 @@ public class Game_Main : MonoBehaviour
     public void ZombieDeath(GameObject Zombie)
     {
         ZombieList.Remove(Zombie);
-        Zombie.transform.GetChild(1).position = new Vector3(0, 0, -10);
+        if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject.layer == 11)
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(0, 0, -10);
 
-        Zombie.transform.GetChild(1).parent = null;
+        GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
         Destroy(Zombie);
     }
 
     public void HumanDeath(GameObject Human)
     {
         HumanList.Remove(Human);
-        Human.transform.GetChild(1).position = new Vector3(0, 0, -10);
-        Human.transform.GetChild(1).parent = null;
+        if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent.gameObject.layer == 12)
+            GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(0, 0, -10);
+        GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
         Destroy(Human);
     }
 

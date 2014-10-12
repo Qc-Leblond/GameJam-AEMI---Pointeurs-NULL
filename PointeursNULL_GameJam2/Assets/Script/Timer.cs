@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Timer : MonoBehaviour 
 {
-    private bool TimerActive = false;
+    public bool TimerActive = false;
 	private float timeLeft;
     private float timeStart = 20;
 	public int ZPoints = 0;

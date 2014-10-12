@@ -72,6 +72,7 @@ public class Minigames : MonoBehaviour
 			}
 			if (InputHumain == InputZombie)
 			{
+
 				Test ();
 			}
 			if (RPCZombie == "Pret" && RPCHumain == "Pret")
