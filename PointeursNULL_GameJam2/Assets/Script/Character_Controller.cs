@@ -4,8 +4,8 @@ using System.Collections;
 public class Character_Controller : MonoBehaviour
 {
 	public bool canMove;
-    private float maxSpeed = 15f;
-    private float jumpSpeed = 1500f;
+    private float maxSpeed = 25f;
+    private float jumpSpeed = 1750f;
     private float Gravity = 20f;
     public bool isHuman;
     protected Animator animator;
@@ -63,7 +63,7 @@ public class Character_Controller : MonoBehaviour
         Physics2D.IgnoreLayerCollision(12, 12);
         if(isHuman)
         {
-            maxSpeed = 17.5f;
+            maxSpeed = 30f;
         }
 
     }
@@ -94,7 +94,7 @@ public class Character_Controller : MonoBehaviour
 
         if (transportObjective)
         {
-            maxSpeed = 12.5f;
+            maxSpeed = 20f;
         }
 
     }
