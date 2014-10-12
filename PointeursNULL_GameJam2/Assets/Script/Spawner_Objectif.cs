@@ -6,7 +6,7 @@ public class Spawner_Objectif : MonoBehaviour {
 	public bool PorteObjectif = false;
 	public GameObject Main;
 	
-	void OnTriggerEnter(Collider other) 
+	void OnTriggerEnter2D(Collider2D other) 
 	{
 		if (other.tag == "Zombie" && PorteObjectif == true) 
 		{

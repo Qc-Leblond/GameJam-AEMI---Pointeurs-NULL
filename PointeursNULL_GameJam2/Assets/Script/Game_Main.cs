@@ -112,7 +112,7 @@ public class Game_Main : MonoBehaviour
         {
             GameObject ZombieObject = Instantiate(Zombie, new Vector3(-60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             ZombieList.Add(ZombieObject);
-            Debug.Log(ZombieList);
+//            Debug.Log(ZombieList);
                 ChangeControlZombie();
         }
         else Debug.Log("Zombie Limit!");
@@ -136,7 +136,7 @@ public class Game_Main : MonoBehaviour
 
     private void SpawnObjective()
     {
-        Debug.Log(ObjectiveLocation.Count);
+//        Debug.Log(ObjectiveLocation.Count);
         for (int i = 0; i < (ObjectiveLocation.Count); i++)
         {
             //Vector3 rand = ObjectiveLocation[Random.Range(0, ObjectiveLocation.Count)];
@@ -166,7 +166,7 @@ public class Game_Main : MonoBehaviour
 
     private void ChangeControlZombie()
     {
-        Debug.Log(activeZombie.ToString());
+//        Debug.Log(activeZombie.ToString());
         if (activeZombie != 0)
             ZombieList[activeZombie - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeZombie >= (ZombieList.Count))
@@ -181,7 +181,7 @@ public class Game_Main : MonoBehaviour
 
     private void ChangeControlHuman()
     {
-        Debug.Log(activeHuman.ToString());
+//        Debug.Log(activeHuman.ToString());
         if (activeHuman != 0)
             HumanList[activeHuman - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeHuman >= (HumanList.Count))
