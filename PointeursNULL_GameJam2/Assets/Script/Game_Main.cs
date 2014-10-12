@@ -97,7 +97,6 @@ public class Game_Main : MonoBehaviour
                 {
                     HumanList[i].GetComponent<Animator>().SetBool("Jump", false);
                     HumanList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
-
                 }
             }
             
@@ -159,11 +158,8 @@ public class Game_Main : MonoBehaviour
         ObjectiveLocation.Add(new Vector3(-72, 101, 0));
         ObjectiveLocation.Add(new Vector3(-48, 71, 0));
         ObjectiveLocation.Add(new Vector3(48, 71, 0));
-
-
     }
-
-
+	
     private void ChangeControlZombie()
     {
 //        Debug.Log(activeZombie.ToString());

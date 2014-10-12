@@ -1,6 +1,13 @@
 fileFormatVersion: 2
 guid: 5a4d38e2b40694a7abae6af3d2ce1540
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: Platform-Spawn_0
+    21300002: Platform-Spawn_1
+    21300004: Platform-Spawn_2
+    21300006: Platform-Spawn_3
+    21300008: Platform-Spawn_4
+    21300010: Platform-Spawn_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -35,6 +42,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
@@ -50,6 +58,7 @@ TextureImporter:
         height: 101
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Platform-Spawn_1
       rect:
         serializedVersion: 2
@@ -59,6 +68,7 @@ TextureImporter:
         height: 19
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Platform-Spawn_2
       rect:
         serializedVersion: 2
@@ -68,6 +78,7 @@ TextureImporter:
         height: 25
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Platform-Spawn_3
       rect:
         serializedVersion: 2
@@ -77,6 +88,7 @@ TextureImporter:
         height: 90
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Platform-Spawn_4
       rect:
         serializedVersion: 2
@@ -86,6 +98,7 @@ TextureImporter:
         height: 144
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Platform-Spawn_5
       rect:
         serializedVersion: 2
@@ -95,5 +108,6 @@ TextureImporter:
         height: 130
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
