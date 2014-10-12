@@ -15,6 +15,8 @@ public class Game_Main : MonoBehaviour
 
     private List<GameObject> HumanList = new List<GameObject>();
     private List<GameObject> ZombieList = new List<GameObject>();
+    private List<GameObject> objectiveList = new List<GameObject>();
+
     private List<Vector3> ObjectiveLocation = new List<Vector3>();
 
     private int LimitZombie = 5;
@@ -35,6 +37,7 @@ public class Game_Main : MonoBehaviour
 
     void Update()
     {
+        
 		if (RoundCount % 2 == 1)
 		{
             for (int i=0; i<=(HumanList.Count -1); i++)
@@ -70,6 +73,11 @@ public class Game_Main : MonoBehaviour
 
         if (NewRound)
         {
+            
+            Debug.Log(ObjectiveLimit.ToString());
+            for (int i = 0; i < objectiveList.Count;i++)
+                Destroy(objectiveList[i]);
+            SpawnObjective();
             if (RoundCount%2 == 0)
             {
                 activeHuman = 0;
@@ -80,6 +88,8 @@ public class Game_Main : MonoBehaviour
                 activeZombie = 0;
                 ChangeControlZombie();
             }
+
+            
             NewRound = false;
             GetComponent<Timer>().NewTimer();
         }
@@ -116,17 +126,31 @@ public class Game_Main : MonoBehaviour
 
     private void SpawnObjective()
     {
-        for (int i = 0; i < ObjectiveLimit; i++)
+        Debug.Log(ObjectiveLocation.Count);
+        for (int i = 0; i < (ObjectiveLocation.Count); i++)
         {
-            Vector3 rand = ObjectiveLocation[Random.Range(0, ObjectiveLocation.Count)];
-            GameObject ObjectiveObject = Instantiate(Objective, rand, Quaternion.Euler(new Vector3(0,0,0))) as GameObject;
-            ObjectiveLocation.Remove(rand);
+            //Vector3 rand = ObjectiveLocation[Random.Range(0, ObjectiveLocation.Count)];
+            GameObject ObjectiveObject = Instantiate(Objective,ObjectiveLocation[i], Quaternion.Euler(new Vector3(0,0,0))) as GameObject;
+            objectiveList.Add(ObjectiveObject);
+           // ObjectiveLocation.Remove(rand);
         }
     }
 
     private void PotentialObjectiveCoordinates()
     {
-        ObjectiveLocation.Add(new Vector3(0,0,0));
+        ObjectiveLocation.Add(new Vector3(0, 1, 0));
+        ObjectiveLocation.Add(new Vector3(0, 27.5f, 0));
+        ObjectiveLocation.Add(new Vector3(-16, 21, 0));
+        ObjectiveLocation.Add(new Vector3(16, 21, 0));
+        ObjectiveLocation.Add(new Vector3(16, 51, 0));
+        ObjectiveLocation.Add(new Vector3(-16, 51, 0));
+        ObjectiveLocation.Add(new Vector3(0, 36, 0));
+        ObjectiveLocation.Add(new Vector3(48, 51, 0));
+        ObjectiveLocation.Add(new Vector3(-48, 51, 0));
+        ObjectiveLocation.Add(new Vector3(-32, 36, 0));
+        ObjectiveLocation.Add(new Vector3(32, 36, 0));
+
+
     }
 
 
