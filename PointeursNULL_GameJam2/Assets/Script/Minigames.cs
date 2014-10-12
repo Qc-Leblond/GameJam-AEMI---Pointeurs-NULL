@@ -4,8 +4,8 @@ using System.Collections;
 public class Minigames : MonoBehaviour 
 {
 
-	public int Chiffre, Jeu, InputZombie = -1, InputHumain = -1;
-	public bool ZombieGagne, HumainGagne, ZombieAjoue = false, HumainAJoue = false;
+	public int Chiffre, Jeu, InputZombie = -1, InputHumain = -10;
+	public bool ZombieGagne, HumainGagne, ZombieAJoue = false, HumainAJoue = false;
 	public string RPCHumain, RPCZombie ;
 
 	public Sprite Carre, Triangle, X, Cercle;
@@ -15,7 +15,7 @@ public class Minigames : MonoBehaviour
 	void Start()
 	{
 		spriteRenderer = gameObject.GetComponent<SpriteRenderer> ();
-		Jeu = 1;//Random.Range (1, 3); COMMENTAIRE TEMPORAIRE
+		Jeu = Random.Range (1, 3); 
 
 		if (Jeu == 1) 
 		{
@@ -23,7 +23,7 @@ public class Minigames : MonoBehaviour
 		}
 	}
 	
-	void FixedUpdate ()
+	void Update ()
 	{
 		if(Jeu == 1)
 		{
@@ -31,44 +31,52 @@ public class Minigames : MonoBehaviour
 			{
 			case 1:
 				spriteRenderer.sprite = Carre;
-				if(Input.GetKey(KeyCode.JoystickButton0))
-					Debug.Log ("OK");
+				if(Input.GetButtonDown("Carre") && ZombieAJoue == false)
+					ZombieAJoue = ZombieGagne = true;
+				else if(Input.GetButtonDown("P2Carre") && HumainAJoue == false)
+					HumainAJoue = HumainGagne = true;
 				break;
 			case 2:
 				spriteRenderer.sprite = Triangle;
-				if(Input.GetKey(KeyCode.JoystickButton1))
-					Debug.Log ("OK");
+				if(Input.GetButtonDown("Triangle") && ZombieAJoue == false)
+					ZombieAJoue = ZombieGagne = true;
+				else if(Input.GetButtonDown("P2Triangle") && HumainAJoue == false)
+					HumainAJoue = HumainGagne = true;
 				break;
 			case 3:
 				spriteRenderer.sprite = X;
-				if(Input.GetKey(KeyCode.JoystickButton2))
-					Debug.Log ("OK");
+				if(Input.GetButtonDown("Jump") && ZombieAJoue == false)
+					ZombieAJoue = ZombieGagne = true;
+				else if(Input.GetButtonDown("P2Jump") && HumainAJoue == false)
+					HumainAJoue = HumainGagne = true;
 				break;
 			case 4:
 				spriteRenderer.sprite = Cercle;
-				if(Input.GetKey(KeyCode.JoystickButton3))
-					Debug.Log ("OK");
+				if(Input.GetButtonDown("Cercle") && ZombieAJoue == false)
+					ZombieAJoue = ZombieGagne = true;
+				else if(Input.GetButtonDown("P2Cercle") && HumainAJoue == false)
+					HumainAJoue = HumainGagne = true;
 				break;
 			}
 		}
 		if(Jeu == 2)
 		{
-			if(ZombieAjoue == false)
+			if(ZombieAJoue == false)
 			{
 				if (Input.GetAxis("PowerUp1") < 0)
 				{
 					InputZombie = 1;
-					ZombieAjoue = true;
+					ZombieAJoue = true;
 				}
 				else if (Input.GetAxis("PowerUp2") > 0)
 				{
 					InputZombie = 2;
-					ZombieAjoue = true;
+					ZombieAJoue = true;
 				}
 				if (Input.GetAxis("PowerUp1") > 0)
 				{
 					InputZombie = 3;
-					ZombieAjoue = true;
+					ZombieAJoue = true;
 				}
 			}
 			if(HumainAJoue == false)
@@ -120,13 +128,22 @@ public class Minigames : MonoBehaviour
 			ZombieGagne = true;
 		else if ((InputZombie) % 3 + 1 == InputHumain)
 			HumainGagne = true;
+		if (InputHumain == InputZombie)
+		{
+			InputZombie = -1; InputHumain = -10;
+			ZombieAJoue = false; HumainAJoue = false;
+			RPCZombie = " "; RPCHumain = " ";
+		}
 	}
 	void OnGUI()
 	{
-		if (Jeu == 2) 
+		if (ZombieGagne == true || HumainGagne == true || Jeu == 2) 
 		{
-			GUI.Box (new Rect ((Screen.width / 2) - 100, 100, 60, 60), "Zombie\n\n" + RPCZombie);
-			GUI.Box (new Rect ((Screen.width / 2) + 40, 100, 60, 60), "Humain\n\n" + RPCHumain);
+			if(Jeu == 2)
+			{
+				GUI.Box (new Rect ((Screen.width / 2) - 100, 100, 60, 60), "Zombie\n\n" + RPCZombie);
+				GUI.Box (new Rect ((Screen.width / 2) + 40, 100, 60, 60), "Humain\n\n" + RPCHumain);
+			}
 			if (ZombieGagne == true)
 				GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Zombie\n\n" + "gagne!");
 			else if (HumainGagne == true)
