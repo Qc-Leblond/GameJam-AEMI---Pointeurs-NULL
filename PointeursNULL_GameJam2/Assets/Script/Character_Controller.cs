@@ -4,11 +4,13 @@ using System.Collections;
 public class Character_Controller : MonoBehaviour
 {
 	public bool canMove;
-    private float maxSpeed = 10f;
+    private float maxSpeed = 15f;
     private float jumpSpeed = 1500f;
     private float Gravity = 20f;
     public bool isHuman;
     protected Animator animator;
+
+    public bool transportObjective = false;
 
     CharacterController Controller;
     private bool facingRight = true;
@@ -54,6 +56,12 @@ public class Character_Controller : MonoBehaviour
             powerUp1 = "PowerUp1";
             powerUp2 = "PowerUp2";
         }
+        Physics2D.IgnoreLayerCollision(11, 11);
+        Physics2D.IgnoreLayerCollision(12, 12);
+        if(isHuman)
+        {
+            maxSpeed = 17.5f;
+        }
 
     }
 
@@ -80,8 +88,11 @@ public class Character_Controller : MonoBehaviour
             rigidbody2D.AddForce(new Vector2(0, jumpSpeed));
         }
 
-        Physics2D.IgnoreLayerCollision(11, 11);
-        Physics2D.IgnoreLayerCollision(12, 12);
+
+        if (transportObjective)
+        {
+            maxSpeed = 12.5f;
+        }
 
     }
 
