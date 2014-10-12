@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Game_Main : MonoBehaviour 
 {
     private int RoundCount = 0;
-    private bool NewRound = false;
+    private bool NewRound = true;
     private int ObjectiveLimit;
 
     public GameObject Zombie;
@@ -25,6 +25,10 @@ public class Game_Main : MonoBehaviour
     private int activeZombie = 0;
     private int activeHuman = 0;
 
+    private bool BetweenRound = true;
+    private float TimeBetweenRound = 3f;
+    private float NextRound = 0f;
+
 
     void Awake()
     {
@@ -33,7 +37,7 @@ public class Game_Main : MonoBehaviour
         SpawnHuman();
         SpawnZombie();
         SpawnObjective();
-
+        NextRound = Time.time + TimeBetweenRound;
     }
 
     void Update()
@@ -44,68 +48,75 @@ public class Game_Main : MonoBehaviour
         }
         else
         {
-            if (RoundCount % 2 == 1)
+            if (NextRound > Time.time) //Things Between Round
             {
-                for (int i = 0; i <= (HumanList.Count - 1); i++)
-                    HumanList[i].GetComponent<Character_Controller>().DontMove();
-                //	ZombieList[0].GetComponent<Character_Controller>().Move();
-                if (Input.GetButtonDown("Spawn"))
-                {
-                    SpawnZombie();
-                }
-                if (Input.GetButtonDown("Change"))
-                {
-                    ChangeControlZombie();
-                }
+               
             }
-            else if (RoundCount % 2 == 0)
+            else
             {
-                for (int i = 0; i <= (ZombieList.Count) - 1; i++)
-                    ZombieList[i].GetComponent<Character_Controller>().DontMove();
-                //	HumanList[0].GetComponent<Character_Controller>().Move();
-                if (Input.GetButtonDown("P2Spawn"))
+                if (RoundCount % 2 == 1)
                 {
-                    Debug.Log("spawn button");
-                    SpawnHuman();
+                    for (int i = 0; i <= (HumanList.Count - 1); i++)
+                        HumanList[i].GetComponent<Character_Controller>().DontMove();
+                    //	ZombieList[0].GetComponent<Character_Controller>().Move();
+                    if (Input.GetButtonDown("Spawn"))
+                    {
+                        SpawnZombie();
+                    }
+                    if (Input.GetButtonDown("Change"))
+                    {
+                        ChangeControlZombie();
+                    }
                 }
-                if (Input.GetButtonDown("P2Change"))
+                else if (RoundCount % 2 == 0)
                 {
-                    Debug.Log("change button");
+                    for (int i = 0; i <= (ZombieList.Count) - 1; i++)
+                        ZombieList[i].GetComponent<Character_Controller>().DontMove();
+                    //	HumanList[0].GetComponent<Character_Controller>().Move();
+                    if (Input.GetButtonDown("P2Spawn"))
+                    {
+                        Debug.Log("spawn button");
+                        SpawnHuman();
+                    }
+                    if (Input.GetButtonDown("P2Change"))
+                    {
+                        Debug.Log("change button");
 
-                    ChangeControlHuman();
+                        ChangeControlHuman();
+                    }
                 }
-            }
-        }
-        if (NewRound)
-        {
-            if (RoundCount%2 == 0)
-            {
-                activeHuman = 0;
-                ChangeControlHuman();
-                for (int i = 0; i < HumanList.Count; i++)
+                if (NewRound)
                 {
-                    if (HumanList[i].GetComponent<Human_Handling>().isIncapacitated()) HumanList[i].GetComponent<Human_Handling>().RemoveTurnToZombie();
-                }
+                    if (RoundCount % 2 == 0)
+                    {
+                        activeHuman = 0;
+                        ChangeControlHuman();
+                        for (int i = 0; i < HumanList.Count; i++)
+                        {
+                            if (HumanList[i].GetComponent<Human_Handling>().isIncapacitated()) HumanList[i].GetComponent<Human_Handling>().RemoveTurnToZombie();
+                        }
 
-                for (int i = 0;i<ZombieList.Count;i++)
-                {
-                    ZombieList[i].GetComponent<Animator>().SetBool("Jump", false);
-                    ZombieList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
+                        for (int i = 0; i < ZombieList.Count; i++)
+                        {
+                            ZombieList[i].GetComponent<Animator>().SetBool("Jump", false);
+                            ZombieList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
+                        }
+                    }
+                    else if (RoundCount % 2 == 1)
+                    {
+                        activeZombie = 0;
+                        ChangeControlZombie();
+                        for (int i = 0; i < HumanList.Count; i++)
+                        {
+                            HumanList[i].GetComponent<Animator>().SetBool("Jump", false);
+                            HumanList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
+                        }
+                    }
+
+                    NewRound = false;
+                    GetComponent<Timer>().NewTimer();
                 }
             }
-            else if (RoundCount % 2 == 1)
-            {
-                activeZombie = 0;
-                ChangeControlZombie();
-                for (int i = 0; i < HumanList.Count; i++)
-                {
-                    HumanList[i].GetComponent<Animator>().SetBool("Jump", false);
-                    HumanList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
-                }
-            }
-            
-            NewRound = false;
-            GetComponent<Timer>().NewTimer();
         }
     }
 
@@ -226,4 +237,9 @@ public class Game_Main : MonoBehaviour
 		Debug.Log ("Combat between " + Zombie.name + " and " + Human.name);
 		GetComponent<Minigames> ().StartGame = true;
 	}
+
+    public void ForNextRound()
+    {
+        NextRound = Time.time + TimeBetweenRound;
+    }
 }
