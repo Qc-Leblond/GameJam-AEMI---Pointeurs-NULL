@@ -57,7 +57,22 @@ public class Game_Main : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag("Objective") == null)
         {
-            Application.LoadLevel("ScoreBoard");
+			if(GetComponent<Timer>().ZPoints > GetComponent<Timer>().HPoints)
+			{
+				zwin = Resources.Load ("zwin") as AudioClip;
+				this.gameObject.AddComponent("zwin");
+				audio.clip = zwin;
+				audio.Play();
+				Application.LoadLevel("ZScoreBoard");
+			}
+			if(GetComponent<Timer>().HPoints > GetComponent<Timer>().ZPoints)
+			{
+				zwin = Resources.Load ("zwin") as AudioClip;
+				this.gameObject.AddComponent("zwin");
+				audio.clip = zwin;
+				audio.Play();
+				Application.LoadLevel("HScoreBoard");
+			}
         }
         else
         {

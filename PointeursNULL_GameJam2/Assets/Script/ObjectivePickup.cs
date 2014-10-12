@@ -28,7 +28,9 @@ public class ObjectivePickup : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().GiveHPoints();
             Debug.Log(GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().HPoints);
 
-            Destroy(this.gameObject);
+			renderer.material.color = Color.red;
+			collider2D.isTrigger = true;
+            Destroy(this.gameObject, 1f);
         }
     }
 }

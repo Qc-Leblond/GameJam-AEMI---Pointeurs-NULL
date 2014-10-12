@@ -54,10 +54,14 @@ public class Menu : MonoBehaviour
             }
         }
 
-        if (Application.loadedLevelName == "ScoreBoard")
+		if (Application.loadedLevelName == "ZScoreBoard")
         {
-            if (ZombieWin) GUI.Label(new Rect(Screen.width / 2 - 230, Screen.height / 2 - 140, 400, 130), "Zombie Player Wins", StyleName);
-            else GUI.Label(new Rect(Screen.width / 2 - 230, Screen.height / 2 - 140, 400, 130), "Human Player Wins", StyleName); 
+            GUI.Label(new Rect(Screen.width / 2 - 230, Screen.height / 2 - 140, 400, 130), "Zombie Player Wins", StyleName);
         }
+
+		if (Application.loadedLevelName == "HScoreBoard")
+		{
+			GUI.Label(new Rect(Screen.width / 2 - 230, Screen.height / 2 - 140, 400, 130), "Human Player Wins", StyleName);
+		}
 	}
 }
