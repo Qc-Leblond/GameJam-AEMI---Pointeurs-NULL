@@ -26,17 +26,13 @@ public class Character_Controller : MonoBehaviour
     private bool Button2Down;
     private string ControllerActive;
 
-<<<<<<< HEAD
     public bool fighting = false;
-=======
 	private AudioClip rpc;
->>>>>>> origin/master2
     
     public LayerMask ground;
     public LayerMask zombie;
     public LayerMask humain;
 
-<<<<<<< HEAD
     int ZombieInput = -1;
     int HumanInput = -1;
     bool ZombieAJoue = false;
@@ -44,13 +40,11 @@ public class Character_Controller : MonoBehaviour
 
     GameObject zombieObj;
     GameObject humanObj;
-=======
 /*
     rpc = Resources.Load ("rpc") as AudioClip;
 	this.gameObject.AddComponent("rpc");
 	audio.clip = rpc;
 	audio.Play();  */
->>>>>>> origin/master2
 
 
     [SerializeField]

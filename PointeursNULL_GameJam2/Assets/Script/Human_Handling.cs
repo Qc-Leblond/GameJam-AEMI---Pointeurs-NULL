@@ -26,14 +26,14 @@ public class Human_Handling : MonoBehaviour
 
     public void GetBitten() 
     { 
-<<<<<<< HEAD
+
         this.Incapacitated = true;
-=======
+
 		HumanBitten = Resources.Load ("HumanBitten") as AudioClip;
 		audio.clip = HumanBitten;
 		audio.Play();
         Incapacitated = true;
->>>>>>> origin/master2
+
         anim.SetBool("Infected", true);
     }
     public bool isIncapacitated() { return Incapacitated; }
