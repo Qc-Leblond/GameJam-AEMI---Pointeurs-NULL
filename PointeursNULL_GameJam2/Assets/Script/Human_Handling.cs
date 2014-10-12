@@ -10,6 +10,7 @@ public class Human_Handling : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         TurnToZombie = 2;
     }
 

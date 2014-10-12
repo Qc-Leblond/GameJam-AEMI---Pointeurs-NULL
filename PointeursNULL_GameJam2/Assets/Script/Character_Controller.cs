@@ -131,9 +131,12 @@ public class Character_Controller : MonoBehaviour
 
         if (!isHuman)
         {
-            GameObject.FindGameObjectWithTag("Minigames").GetComponent<Minigames>().StartGame = Physics2D.OverlapCircle(transform.position, 8f, humain);
-            if (Physics2D.OverlapCircle(transform.position, 8f, humain))
-                this.DontMove();
+            if(Physics2D.OverlapCircle(transform.position, 8f, humain))
+            {
+            
+                DontMove();
+            }
+                
             
         }
         else
