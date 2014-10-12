@@ -219,5 +219,6 @@ public class Game_Main : MonoBehaviour
 	public void StartCombat(GameObject Zombie, GameObject Human)
 	{
 		Debug.Log ("Combat between " + Zombie.name + " and " + Human.name);
+		GetComponent<Minigames> ().StartGame = true;
 	}
 }

@@ -23,6 +23,11 @@ public class Human_Handling : MonoBehaviour
     public void GetBitten() { Incapacitated = true; }
     public bool isIncapacitated() { return Incapacitated; }
     public void RemoveTurnToZombie() { TurnToZombie -= 1; }
+	public void FuckOffIncapacitated()
+	{
+		Incapacitated = false;
+		transform.parent = null;
+	}
 
 	void OnEnterCollision2D(Collision2D other)
 	{

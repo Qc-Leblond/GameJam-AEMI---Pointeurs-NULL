@@ -8,6 +8,6 @@ public class Objectifs : MonoBehaviour {
 	void OnTriggerEnter(Collider other) 
 	{
 		PorteObjectif = true;
-		Destroy (other.gameObject);
+		other.transform.parent = transform;
 	}
 }

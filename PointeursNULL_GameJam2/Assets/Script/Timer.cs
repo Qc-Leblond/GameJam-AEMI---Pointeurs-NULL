@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour {
         {
             GUI.Box(new Rect((Screen.width / 2) - 30, 50, 60, 50), "Temps \n" + ((int)timeLeft));
         }
-		GUI.Box (new Rect (100, Screen.height - 100, 50, 50), "Score \n"+ZPoints);
+		GUI.Box (new Rect (100, Screen.height - 100, 50, 50), "Score \n"+ZPoints.ToString());
 		GUI.Box (new Rect (Screen.width - 100, Screen.height-100, 50, 50), "Score \n"+HPoints);
 	}
 
@@ -37,4 +37,14 @@ public class Timer : MonoBehaviour {
         timeLeft = timeStart;
         TimerActive = true;
     }
+
+	public void GiveZPoints()
+	{
+		ZPoints++;
+	}
+
+	public void GiveHPoints()
+	{
+		HPoints++;
+	}
 }
