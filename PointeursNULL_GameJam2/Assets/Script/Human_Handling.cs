@@ -8,6 +8,8 @@ public class Human_Handling : MonoBehaviour
     public GameObject Main;
     public Animator anim;
 
+	private AudioClip HumanBitten;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -24,6 +26,9 @@ public class Human_Handling : MonoBehaviour
 
     public void GetBitten() 
     { 
+		HumanBitten = Resources.Load ("HumanBitten") as AudioClip;
+		audio.clip = HumanBitten;
+		audio.Play();
         Incapacitated = true;
         anim.SetBool("Infected", true);
         GetComponent<Collider2D>().isTrigger = true;

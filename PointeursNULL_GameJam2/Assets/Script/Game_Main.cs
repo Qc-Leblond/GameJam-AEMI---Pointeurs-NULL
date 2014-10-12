@@ -12,6 +12,11 @@ public class Game_Main : MonoBehaviour
     public GameObject Human;
 	public GameObject Objective;
     public GameObject camera;
+	
+	private AudioClip zspawn;
+	private AudioClip hspawn;
+	private AudioClip zdeath;
+	private AudioClip hdies;
 
     private List<GameObject> HumanList = new List<GameObject>();
     private List<GameObject> ZombieList = new List<GameObject>();
@@ -25,6 +30,14 @@ public class Game_Main : MonoBehaviour
     private int activeZombie = 0;
     private int activeHuman = 0;
 
+	private AudioClip zwin;
+
+
+	/*
+			zwin = Resources.Load ("zwin") as AudioClip;
+	  		this.gameObject.AddComponent("zwin");
+			audio.clip = zwin;
+			audio.Play(); */
 
     void Awake()
     {
@@ -111,6 +124,9 @@ public class Game_Main : MonoBehaviour
 
     public void SpawnZombie()
     {
+		zspawn = Resources.Load ("zspawn") as AudioClip;
+		audio.clip = zspawn;
+		audio.Play();
         if (LimitZombie >= ZombieList.Count)
         {
             GameObject ZombieObject = Instantiate(Zombie, new Vector3(-75f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
@@ -123,6 +139,9 @@ public class Game_Main : MonoBehaviour
 
     public void SpawnHuman()
     {
+		hspawn = Resources.Load ("hspawn") as AudioClip;
+		audio.clip = hspawn;
+		audio.Play();
         if (LimitHuman >= HumanList.Count)
         {
             GameObject HumanObject = Instantiate(Human, new Vector3(76f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
@@ -197,6 +216,9 @@ public class Game_Main : MonoBehaviour
 
     public void ZombieDeath(GameObject Zombie)
     {
+		zdeath = Resources.Load ("zdeath") as AudioClip;
+		audio.clip = zdeath;
+		audio.Play();
         ZombieList.Remove(Zombie);
         Zombie.transform.GetChild(1).position = new Vector3(0, 0, -10);
 
@@ -206,6 +228,9 @@ public class Game_Main : MonoBehaviour
 
     public void HumanDeath(GameObject Human)
     {
+		hdies = Resources.Load ("hdies") as AudioClip;
+		audio.clip = hdies;
+		audio.Play();
         HumanList.Remove(Human);
         Human.transform.GetChild(1).position = new Vector3(0, 0, -10);
         Human.transform.GetChild(1).parent = null;
