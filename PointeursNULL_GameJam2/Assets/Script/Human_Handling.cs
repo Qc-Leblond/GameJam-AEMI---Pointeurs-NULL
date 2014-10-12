@@ -28,12 +28,12 @@ public class Human_Handling : MonoBehaviour
     { 
 
         this.Incapacitated = true;
-
+        gameObject.layer = 15;
 		HumanBitten = Resources.Load ("HumanBitten") as AudioClip;
 		audio.clip = HumanBitten;
 		audio.Play();
         Incapacitated = true;
-
+        rigidbody2D.isKinematic = true;
         anim.SetBool("Infected", true);
     }
     public bool isIncapacitated() { return Incapacitated; }
@@ -53,7 +53,7 @@ public class Human_Handling : MonoBehaviour
 		
 	}
 
-    void OnTriggerEnter2D(Collider2D collide)
+ /*   void OnTriggerEnter2D(Collider2D collide)
     {
         if (collide.gameObject.layer == 12 && collide.GetComponent<Human_Handling>().Incapacitated && !GetComponent<Character_Controller>().transportObjective)
         {
@@ -61,5 +61,5 @@ public class Human_Handling : MonoBehaviour
             transform.parent = collide.transform;
         }
         
-    }
+    }*/
 }

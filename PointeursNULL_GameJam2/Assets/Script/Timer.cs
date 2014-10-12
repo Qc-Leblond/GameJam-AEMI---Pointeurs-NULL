@@ -30,10 +30,11 @@ public class Timer : MonoBehaviour
 	{
         GUIStyle StyleName = new GUIStyle();
         GUIStyle StyleForRest = new GUIStyle();
+        StyleName.normal.textColor = Color.white;
+        StyleForRest.normal.textColor = Color.white;
         StyleName.font = fontName;
         StyleForRest.font = fontForRest;
-        StyleName.font.material.color = Color.white;
-        StyleForRest.font.material.color = Color.white;
+
 
         if (TimerActive)
         {

@@ -106,6 +106,8 @@ public class Character_Controller : MonoBehaviour
 
         if(fighting)
         {
+            zombieObj.rigidbody2D.isKinematic = true;
+            humanObj.rigidbody2D.isKinematic = true;
             Fight();
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Timer>().TimerActive = false;
 
@@ -181,8 +183,15 @@ public class Character_Controller : MonoBehaviour
         if(gameObject.layer ==11 && other.gameObject.layer == 12)
         {
             fighting = true;
+            this.rigidbody2D.isKinematic = true;
             zombieObj = this.gameObject;
             humanObj = other.gameObject;
+        }
+        else if (gameObject.layer == 12 && other.gameObject.layer == 11)
+        {
+            fighting = true;
+            zombieObj = other.gameObject;
+            humanObj = this.gameObject;
         }
     }
 
@@ -214,11 +223,14 @@ public class Character_Controller : MonoBehaviour
 	public void Move()
 	{
 		canMove = true;
+        Debug.Log(gameObject.name + canMove.ToString());
+
 	}
 
 	public void DontMove()
 	{
 		canMove = false;
+        Debug.Log(gameObject.name + canMove.ToString());
 	}
 
 
@@ -288,7 +300,7 @@ public class Character_Controller : MonoBehaviour
                 zombieObj.GetComponent<Character_Controller>().Move();
                 //GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
                 //Debug.Log(humanObj.transform.GetChild(1).name);
-                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent = humanObj.transform)
+                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent == humanObj.transform)
                 {
                     GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
                 }
@@ -296,6 +308,7 @@ public class Character_Controller : MonoBehaviour
                 Debug.Log(humanObj.GetComponent<Human_Handling>().Incapacitated);
 
                 fighting = false;
+                zombieObj.rigidbody2D.isKinematic = false;
             }
             else if ((ZombieInput) % 3 + 1 == HumanInput)
             {
@@ -304,14 +317,14 @@ public class Character_Controller : MonoBehaviour
                 //HumainGagne = true;
                 humanObj.GetComponent<Character_Controller>().Move();
 
-                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent = zombieObj.transform)
+                if (GameObject.FindGameObjectWithTag("MainCamera").transform.parent == zombieObj.transform)
                 {
                     GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;
                 }
                 Destroy(zombieObj);
                 //Destroy(GameObject.FindGameObjectWithTag("Zombie"));
                 fighting = false;
-
+                humanObj.rigidbody2D.isKinematic = false;
             }
             else
             {
@@ -322,6 +335,7 @@ public class Character_Controller : MonoBehaviour
             }
             if(!fighting)
             {
+                Debug.Log("not fighting");
                 ZombieInput = -1; ZombieAJoue = false;
                 HumanInput = -1; HumanAJoue = false;
             }

@@ -76,12 +76,12 @@ public class Game_Main : MonoBehaviour
         }
         else
         {
-            if (NextRound > Time.time) //Things Between Round
+           /* if (NextRound > Time.time) //Things Between Round
             {
                
             }
             else
-            {
+            {*/
                 if (RoundCount % 2 == 1)
                 {
                     for (int i = 0; i <= (HumanList.Count - 1); i++)
@@ -143,7 +143,7 @@ public class Game_Main : MonoBehaviour
 
                     NewRound = false;
                     GetComponent<Timer>().NewTimer();
-                }
+                //}
             }
         }
     }
@@ -212,7 +212,7 @@ public class Game_Main : MonoBehaviour
     private void ChangeControlZombie()
     {
 //        Debug.Log(activeZombie.ToString());
-        if (activeZombie != 0)
+        if (activeZombie != 0 && ZombieList[activeZombie -1] != null)
             ZombieList[activeZombie - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeZombie >= (ZombieList.Count))
             activeZombie = 0;
@@ -227,7 +227,7 @@ public class Game_Main : MonoBehaviour
     private void ChangeControlHuman()
     {
 //        Debug.Log(activeHuman.ToString());
-        if (activeHuman != 0)
+        if (activeHuman != 0 && HumanList[activeHuman - 1] != null)
             HumanList[activeHuman - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeHuman >= (HumanList.Count))
             activeHuman = 0;
@@ -267,8 +267,10 @@ public class Game_Main : MonoBehaviour
 
     public void HumanTransform(GameObject Human)
     {
+            GameObject.FindGameObjectWithTag("MainCamera").transform.parent = null;        
         HumanList.Remove(Human);
         Vector3 Pos = Human.transform.position;
+
         Destroy(Human);
         GameObject NewZombie = Instantiate(Zombie, Pos, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
         ZombieList.Add(NewZombie);
