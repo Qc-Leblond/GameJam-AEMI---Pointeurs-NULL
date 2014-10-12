@@ -78,11 +78,23 @@ public class Game_Main : MonoBehaviour
             {
                 activeHuman = 0;
                 ChangeControlHuman();
+                for (int i = 0;i<ZombieList.Count;i++)
+                {
+                    ZombieList[i].GetComponent<Animator>().SetBool("Jump", false);
+                    ZombieList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
+
+                }
             }
             else if (RoundCount % 2 == 1)
             {
                 activeZombie = 0;
                 ChangeControlZombie();
+                for (int i = 0; i < HumanList.Count; i++)
+                {
+                    HumanList[i].GetComponent<Animator>().SetBool("Jump", false);
+                    HumanList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
+
+                }
             }
 
             
