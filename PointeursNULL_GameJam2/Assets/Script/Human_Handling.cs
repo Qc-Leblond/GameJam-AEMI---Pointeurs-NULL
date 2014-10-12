@@ -16,7 +16,7 @@ public class Human_Handling : MonoBehaviour
     {
         if (TurnToZombie == 0)
         {
-            Main.GetComponent<Game_Main>().ZombieDeath(gameObject);
+            Main.GetComponent<Game_Main>().HumanTransform(gameObject);
         }
     }
 
