@@ -72,7 +72,7 @@ public class Character_Controller : MonoBehaviour
         else
             animator.SetFloat("Speed",0.0f);*/
 
-        if (grounded && Input.GetButtonDown(jump))
+        if (grounded && Input.GetButtonDown(jump) && canMove)
         {
             animator.SetBool("Jump", false);
             rigidbody2D.AddForce(new Vector2(0, jumpSpeed));
@@ -118,11 +118,12 @@ public class Character_Controller : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
             animator.SetFloat("Speed", Mathf.Abs(move));
+            if (move > 0 && !facingRight)
+                flip();
+            else if (move < 0 && facingRight)
+                flip();
         }
-        if (move > 0 && !facingRight)
-            flip();
-        else if (move < 0 && facingRight)
-            flip();
+        
     }
 
     void flip()
