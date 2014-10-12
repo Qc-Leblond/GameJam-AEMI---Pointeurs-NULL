@@ -21,11 +21,14 @@ public class Game_Main : MonoBehaviour
     private int LimitHuman = 3;
 
     private int activeZombie = 0;
+    private int activeHuman = 0;
+
 
     void Awake()
     {
         AddToRoundCount();
         PotentialObjectiveCoordinates();
+        SpawnHuman();
         SpawnZombie();
 
     }
@@ -34,33 +37,49 @@ public class Game_Main : MonoBehaviour
     {
 		if (RoundCount % 2 == 1)
 		{
-			Human.GetComponent<Character_Controller>().DontMove();
-			Zombie.GetComponent<Character_Controller>().Move();
+            for (int i=0; i<=(HumanList.Count -1); i++)
+			HumanList[i].GetComponent<Character_Controller>().DontMove();
+		//	ZombieList[0].GetComponent<Character_Controller>().Move();
             if (Input.GetButtonDown("Spawn"))
             {
                 SpawnZombie();
             }
             if(Input.GetButtonDown("Change"))
             {
-                ChangeControl();
+                ChangeControlZombie();
             }
 		}
 		else if (RoundCount % 2 == 0)
         {
-			Zombie.GetComponent<Character_Controller>().DontMove();
-			Human.GetComponent<Character_Controller>().Move();
+            for (int i = 0; i <= (ZombieList.Count) - 1; i++)
+                ZombieList[i].GetComponent<Character_Controller>().DontMove();
+		//	HumanList[0].GetComponent<Character_Controller>().Move();
             if(Input.GetButtonDown("P2Spawn"))
             {
+                Debug.Log("spawn button");
                 SpawnHuman();
             }
-            /*if (Input.GetButtonDown("Change"))
+            if (Input.GetButtonDown("P2Change"))
             {
-                ChangeControl();
-            }*/
+                Debug.Log("change button");
+
+                ChangeControlHuman();
+            }
+            
 		}
 
         if (NewRound)
         {
+            if (RoundCount%2 == 0)
+            {
+                activeHuman = 0;
+                ChangeControlHuman();
+            }
+            else if (RoundCount % 2 == 1)
+            {
+                activeZombie = 0;
+                ChangeControlZombie();
+            }
             NewRound = false;
             GetComponent<Timer>().NewTimer();
         }
@@ -72,7 +91,8 @@ public class Game_Main : MonoBehaviour
         {
             GameObject ZombieObject = Instantiate(Zombie, new Vector3(-60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             ZombieList.Add(ZombieObject);
-                ChangeControl();
+            Debug.Log(ZombieList);
+                ChangeControlZombie();
         }
         else Debug.Log("Zombie Limit!");
     }
@@ -81,8 +101,11 @@ public class Game_Main : MonoBehaviour
     {
         if (LimitHuman >= HumanList.Count)
         {
-            GameObject HumanObject = Instantiate(Human, new Vector3(0, 0, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+            GameObject HumanObject = Instantiate(Human, new Vector3(60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+            HumanObject.transform.localScale = new Vector3(-5, 5, 1);
+            HumanObject.GetComponent<Character_Controller>().isHuman = true;
             HumanList.Add(HumanObject);
+            ChangeControlHuman();
         }
         else Debug.Log("Human Limit!");
     }
@@ -107,18 +130,33 @@ public class Game_Main : MonoBehaviour
     }
 
 
-    private void ChangeControl()
+    private void ChangeControlZombie()
     {
         Debug.Log(activeZombie.ToString());
-        if (activeZombie !=0)
-            ZombieList[activeZombie-1].GetComponent<Character_Controller>().canMove = false;
+        if (activeZombie != 0)
+            ZombieList[activeZombie - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeZombie >= (ZombieList.Count))
             activeZombie = 0;
         ZombieList[activeZombie].GetComponent<Character_Controller>().canMove = true;
 
 
         camera.transform.parent = ZombieList[activeZombie].transform;
-        camera.transform.position = (ZombieList[activeZombie].transform.position + new Vector3(0,0.5f,-10));
+        camera.transform.position = (ZombieList[activeZombie].transform.position + new Vector3(0, 0.5f, -10));
         activeZombie++;
+    }
+
+    private void ChangeControlHuman()
+    {
+        Debug.Log(activeHuman.ToString());
+        if (activeHuman != 0)
+            HumanList[activeHuman - 1].GetComponent<Character_Controller>().canMove = false;
+        if (activeHuman >= (HumanList.Count))
+            activeHuman = 0;
+        HumanList[activeHuman].GetComponent<Character_Controller>().canMove = true;
+
+
+        camera.transform.parent = HumanList[activeHuman].transform;
+        camera.transform.position = (HumanList[activeHuman].transform.position + new Vector3(0, 0.5f, -10));
+        activeHuman++;
     }
 }
