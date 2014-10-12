@@ -24,6 +24,8 @@ public class Character_Controller : MonoBehaviour
     private bool Button2Down;
     private string ControllerActive;
 
+
+    
     public LayerMask ground;
 
     [SerializeField]
@@ -78,6 +80,8 @@ public class Character_Controller : MonoBehaviour
             rigidbody2D.AddForce(new Vector2(0, jumpSpeed));
         }
 
+        Physics2D.IgnoreLayerCollision(11, 11);
+        Physics2D.IgnoreLayerCollision(12, 12);
 
     }
 

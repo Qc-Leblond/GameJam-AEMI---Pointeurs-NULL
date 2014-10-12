@@ -149,7 +149,7 @@ public class Game_Main : MonoBehaviour
     private void PotentialObjectiveCoordinates()
     {
         ObjectiveLocation.Add(new Vector3(0, 1, 0));
-        ObjectiveLocation.Add(new Vector3(0, 27.5f, 0));
+        //ObjectiveLocation.Add(new Vector3(0, 27.5f, 0));
         ObjectiveLocation.Add(new Vector3(-16, 21, 0));
         ObjectiveLocation.Add(new Vector3(16, 21, 0));
         ObjectiveLocation.Add(new Vector3(16, 51, 0));
