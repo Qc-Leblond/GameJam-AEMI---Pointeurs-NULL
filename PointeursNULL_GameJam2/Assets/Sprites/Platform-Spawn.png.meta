@@ -1,7 +1,6 @@
 fileFormatVersion: 2
 guid: 5a4d38e2b40694a7abae6af3d2ce1540
 TextureImporter:
-  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,23 +24,76 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Platform-Spawn_0
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 521
+        width: 152
+        height: 101
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Platform-Spawn_1
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 567
+        width: 141
+        height: 19
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Platform-Spawn_2
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 533
+        width: 95
+        height: 25
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Platform-Spawn_3
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 533
+        width: 102
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Platform-Spawn_4
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 494
+        width: 160
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Platform-Spawn_5
+      rect:
+        serializedVersion: 2
+        x: 1249
+        y: 513
+        width: 85
+        height: 130
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 
