@@ -4,8 +4,8 @@ using System.Collections;
 public class Character_Controller : MonoBehaviour
 {
 	public bool canMove;
-    private float Speed = 10f;
-    private float jumpSpeed = 15f;
+    private float maxSpeed = 10f;
+    private float jumpSpeed = 1000f;
     private float Gravity = 20f;
     public bool isHuman;
     protected Animator animator;
@@ -23,6 +23,14 @@ public class Character_Controller : MonoBehaviour
     private bool Button1Down;
     private bool Button2Down;
     private string ControllerActive;
+
+    public LayerMask ground;
+
+    [SerializeField]
+    bool grounded = false;
+
+    public Transform groundCheck;
+    float groundRadius = 0.2f;
 
     void Start()
     {
@@ -52,7 +60,7 @@ public class Character_Controller : MonoBehaviour
         DpadButton();
         Triggers();
 
-        if (Input.GetAxis(horizontal) < 0 && canMove)
+      /*  if (Input.GetAxis(horizontal) < 0 && canMove)
             this.transform.localScale = (new Vector3(-5, 5, 1));
 
         if (Input.GetAxis(horizontal) > 0 && canMove)
@@ -62,12 +70,20 @@ public class Character_Controller : MonoBehaviour
         if ((Mathf.Abs(moveDirection.x) > 0.5f || Mathf.Abs(moveDirection.y) > 0.5f) && canMove)
             animator.SetFloat("Speed", Mathf.Sqrt((moveDirection.x*moveDirection.x)+(moveDirection.y*moveDirection.y)));
         else
-            animator.SetFloat("Speed",0.0f);
+            animator.SetFloat("Speed",0.0f);*/
+
+        if (grounded && Input.GetButtonDown(jump))
+        {
+            animator.SetBool("Jump", false);
+            rigidbody2D.AddForce(new Vector2(0, jumpSpeed));
+        }
+
+
     }
 
     void FixedUpdate()
     {
-        Controller = GetComponent<CharacterController>();
+       /* Controller = GetComponent<CharacterController>();
 		if (Controller.isGrounded && canMove == true) 
         {
 			// We are grounded, so recalculate
@@ -91,8 +107,32 @@ public class Character_Controller : MonoBehaviour
         moveDirection.y = Ymove;
         Controller.Move(moveDirection * Time.deltaTime);
         if(!canMove)
-            moveDirection = new Vector3(0,0,0);
+            moveDirection = new Vector3(0,0,0);*/
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
+        animator.SetBool("Jump", grounded);
+
+
+
+        float move = Input.GetAxis(horizontal);
+        if(canMove)
+        {
+            rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+            animator.SetFloat("Speed", Mathf.Abs(move));
+        }
+        if (move > 0 && !facingRight)
+            flip();
+        else if (move < 0 && facingRight)
+            flip();
     }
+
+    void flip()
+    {
+        facingRight = !facingRight;
+        Vector3 scaling = transform.localScale;
+        scaling.x *= -1;
+        transform.localScale = scaling;
+    }
+
 
     void Triggers()
     {

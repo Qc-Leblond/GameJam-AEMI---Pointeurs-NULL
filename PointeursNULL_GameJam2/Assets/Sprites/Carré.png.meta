@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 514d17e28d12898418deba242944212d
+guid: 6953201140abf4643937cf19d4cef4ae
 TextureImporter:
   fileIDToRecycleName:
     21300000: "Carr\xE9"
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

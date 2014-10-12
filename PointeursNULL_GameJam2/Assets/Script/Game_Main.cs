@@ -123,7 +123,6 @@ public class Game_Main : MonoBehaviour
         if (LimitHuman >= HumanList.Count)
         {
             GameObject HumanObject = Instantiate(Human, new Vector3(60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
-            HumanObject.transform.localScale = new Vector3(-5, 5, 1);
             HumanObject.GetComponent<Character_Controller>().isHuman = true;
             HumanList.Add(HumanObject);
             ChangeControlHuman();
