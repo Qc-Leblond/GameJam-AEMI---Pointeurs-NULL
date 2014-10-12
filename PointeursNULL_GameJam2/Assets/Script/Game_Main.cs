@@ -38,40 +38,44 @@ public class Game_Main : MonoBehaviour
 
     void Update()
     {
-        
-		if (RoundCount % 2 == 1)
-		{
-            for (int i=0; i<=(HumanList.Count -1); i++)
-			HumanList[i].GetComponent<Character_Controller>().DontMove();
-		//	ZombieList[0].GetComponent<Character_Controller>().Move();
-            if (Input.GetButtonDown("Spawn"))
-            {
-                SpawnZombie();
-            }
-            if(Input.GetButtonDown("Change"))
-            {
-                ChangeControlZombie();
-            }
-		}
-		else if (RoundCount % 2 == 0)
+        if (GameObject.FindGameObjectWithTag("Objective") == null)
         {
-            for (int i = 0; i <= (ZombieList.Count) - 1; i++)
-                ZombieList[i].GetComponent<Character_Controller>().DontMove();
-		//	HumanList[0].GetComponent<Character_Controller>().Move();
-            if(Input.GetButtonDown("P2Spawn"))
+            Application.LoadLevel("ScoreBoard");
+        }
+        else
+        {
+            if (RoundCount % 2 == 1)
             {
-                Debug.Log("spawn button");
-                SpawnHuman();
+                for (int i = 0; i <= (HumanList.Count - 1); i++)
+                    HumanList[i].GetComponent<Character_Controller>().DontMove();
+                //	ZombieList[0].GetComponent<Character_Controller>().Move();
+                if (Input.GetButtonDown("Spawn"))
+                {
+                    SpawnZombie();
+                }
+                if (Input.GetButtonDown("Change"))
+                {
+                    ChangeControlZombie();
+                }
             }
-            if (Input.GetButtonDown("P2Change"))
+            else if (RoundCount % 2 == 0)
             {
-                Debug.Log("change button");
+                for (int i = 0; i <= (ZombieList.Count) - 1; i++)
+                    ZombieList[i].GetComponent<Character_Controller>().DontMove();
+                //	HumanList[0].GetComponent<Character_Controller>().Move();
+                if (Input.GetButtonDown("P2Spawn"))
+                {
+                    Debug.Log("spawn button");
+                    SpawnHuman();
+                }
+                if (Input.GetButtonDown("P2Change"))
+                {
+                    Debug.Log("change button");
 
-                ChangeControlHuman();
+                    ChangeControlHuman();
+                }
             }
-            
-		}
-
+        }
         if (NewRound)
         {
             if (RoundCount%2 == 0)
