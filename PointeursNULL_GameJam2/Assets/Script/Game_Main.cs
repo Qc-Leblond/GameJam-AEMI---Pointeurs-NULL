@@ -186,7 +186,8 @@ public class Game_Main : MonoBehaviour
             HumanList[activeHuman - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeHuman >= (HumanList.Count))
             activeHuman = 0;
-        if (!HumanList[activeHuman].GetComponent<Human_Handling>().isIncapacitated()) HumanList[activeHuman].GetComponent<Character_Controller>().canMove = true;
+        if (!HumanList[activeHuman].GetComponent<Human_Handling>().isIncapacitated()) 
+            HumanList[activeHuman].GetComponent<Character_Controller>().canMove = true;
 
 
         camera.transform.parent = HumanList[activeHuman].transform;
