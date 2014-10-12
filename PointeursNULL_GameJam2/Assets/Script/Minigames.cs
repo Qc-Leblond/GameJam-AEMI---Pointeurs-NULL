@@ -4,19 +4,19 @@ using System.Collections;
 public class Minigames : MonoBehaviour 
 {
 	
-	public int  InputZombie = -1, 
-				InputHumain = -1;
-	public bool ZombieGagne, 
-				HumainGagne, 
-				ZombieAJoue = false, 
-				HumainAJoue = false,
-				StartGame = true;
-	public string RPCHumain, 
-				  RPCZombie ;
+	private int  InputZombie = -1, 
+				 InputHumain = -1;
+	private bool ZombieGagne, 
+				 HumainGagne, 
+			 	 ZombieAJoue = false, 
+				 HumainAJoue = false;
+	public bool  StartGame = true;
+	private string RPCHumain, 
+				   RPCZombie ;
 
 	//public GUIText Texte;
 	
-	void Test()
+	void Reinitialisation()
 	{
 		InputZombie = -1; InputHumain = -1;
 		ZombieAJoue = false; HumainAJoue = false;
@@ -72,7 +72,7 @@ public class Minigames : MonoBehaviour
 			}
 			if (InputHumain == InputZombie)
 			{
-				Test ();
+				Reinitialisation();
 			}
 			if (RPCZombie == "Pret" && RPCHumain == "Pret")
 			{
@@ -105,15 +105,19 @@ public class Minigames : MonoBehaviour
 		}
 			
 			if ((InputHumain) % 3 + 1 == InputZombie)
-			{
+			{				
 				ZombieGagne = true;
+				//GetComponent<Character_Controller>().canMove = true;
+				Reinitialisation();
                 GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
 				StartGame = false;
 			}
 			else if ((InputZombie) % 3 + 1 == InputHumain)
 			{
 				HumainGagne = true;
-                Destroy(GameObject.FindGameObjectWithTag("Zombie"));
+				//GetComponent<Character_Controller>().canMove = true;
+				Reinitialisation();
+				Destroy(GameObject.FindGameObjectWithTag("Zombie"));
                 HumainGagne = false;
 				StartGame = false;
 			}
@@ -125,10 +129,6 @@ public class Minigames : MonoBehaviour
 		{
 			GUI.Box (new Rect ((Screen.width / 2) - 100, 100, 60, 60), "Zombie\n\n" + RPCZombie);
 			GUI.Box (new Rect ((Screen.width / 2) + 40, 100, 60, 60), "Humain\n\n" + RPCHumain);
-			if (ZombieGagne == true)
-				GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Zombie\n\n" + "gagne!");
-			else if (HumainGagne == true)
-				GUI.Box (new Rect ((Screen.width / 2) - 30, 200, 60, 60), "Humain\n\n" + "gagne!");
 		}
 	}
 }
