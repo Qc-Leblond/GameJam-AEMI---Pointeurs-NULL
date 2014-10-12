@@ -5,9 +5,9 @@ public class Minigames : MonoBehaviour
 {
 
 	public int Chiffre, Jeu, InputZombie = -1, InputHumain = -1;
-	public bool ZombieGagne, HumainGagne;
+	public bool ZombieGagne, HumainGagne, ZombieAjoue = false, HumainAJoue = false;
 	public string RPCHumain, RPCZombie ;
-
+	
 	void Start()
 	{
 		Jeu = 2;//Random.Range (1, 3); COMMENTAIRE TEMPORAIRE
@@ -18,7 +18,7 @@ public class Minigames : MonoBehaviour
 		}
 	}
 	
-	void Update ()
+	void FixedUpdate ()
 	{
 		if(Jeu == 1)
 		{
@@ -60,20 +60,42 @@ public class Minigames : MonoBehaviour
 		}
 		if(Jeu == 2)
 		{
-			if(Input.GetKey(KeyCode.JoystickButton0))
-				InputZombie = 1;
-			else if(Input.GetKey (KeyCode.JoystickButton2))
-				InputZombie = 2;
-			else if(Input.GetKey (KeyCode.JoystickButton3))
-				InputZombie = 3;
-							
-			if(Input.GetKey(KeyCode.Joystick2Button0))
-				InputHumain = 1;
-			else if(Input.GetKey (KeyCode.Joystick2Button2))
-				InputHumain = 2;
-			else if(Input.GetKey (KeyCode.Joystick2Button3))
-				InputHumain = 3;
-
+			if(ZombieAjoue == false)
+			{
+				if (Input.GetAxis("PowerUp1") < 0)
+				{
+					InputZombie = 1;
+					ZombieAjoue = true;
+				}
+				else if (Input.GetAxis("PowerUp2") > 0)
+				{
+					InputZombie = 2;
+					ZombieAjoue = true;
+				}
+				if (Input.GetAxis("PowerUp1") > 0)
+				{
+					InputZombie = 3;
+					ZombieAjoue = true;
+				}
+			}
+			if(HumainAJoue == false)
+			{
+				if (Input.GetAxis("P2PowerUp1") < 0)
+				{
+					InputHumain = 1;
+					HumainAJoue = true;
+				}
+				else if (Input.GetAxis("P2PowerUp2") > 0)
+				{
+					InputHumain = 2;
+					HumainAJoue = true;
+				}
+				if (Input.GetAxis("P2PowerUp1") > 0)
+				{
+					InputHumain = 3;
+					HumainAJoue = true;
+				}
+			}
 			switch(InputZombie)
 			{
 				case 1:
