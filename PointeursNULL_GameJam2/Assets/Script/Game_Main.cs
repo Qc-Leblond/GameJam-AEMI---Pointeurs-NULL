@@ -78,11 +78,15 @@ public class Game_Main : MonoBehaviour
             {
                 activeHuman = 0;
                 ChangeControlHuman();
+                for (int i = 0; i < HumanList.Count; i++)
+                {
+                    if (HumanList[i].GetComponent<Human_Handling>().isIncapacitated()) HumanList[i].GetComponent<Human_Handling>().RemoveTurnToZombie();
+                }
+
                 for (int i = 0;i<ZombieList.Count;i++)
                 {
                     ZombieList[i].GetComponent<Animator>().SetBool("Jump", false);
                     ZombieList[i].GetComponent<Animator>().SetFloat("Speed", 0.0f);
-
                 }
             }
             else if (RoundCount % 2 == 1)
@@ -96,7 +100,6 @@ public class Game_Main : MonoBehaviour
 
                 }
             }
-
             
             NewRound = false;
             GetComponent<Timer>().NewTimer();
@@ -184,7 +187,7 @@ public class Game_Main : MonoBehaviour
             HumanList[activeHuman - 1].GetComponent<Character_Controller>().canMove = false;
         if (activeHuman >= (HumanList.Count))
             activeHuman = 0;
-        HumanList[activeHuman].GetComponent<Character_Controller>().canMove = true;
+        if (!HumanList[activeHuman].GetComponent<Human_Handling>().isIncapacitated()) HumanList[activeHuman].GetComponent<Character_Controller>().canMove = true;
 
 
         camera.transform.parent = HumanList[activeHuman].transform;
