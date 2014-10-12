@@ -138,11 +138,14 @@ public class Minigames : MonoBehaviour
 			if ((InputHumain) % 3 + 1 == InputZombie)
 			{
 				ZombieGagne = true;
+                GameObject.FindGameObjectWithTag("Human").GetComponent<Human_Handling>().GetBitten();
 				GO = false;
 			}
 			else if ((InputZombie) % 3 + 1 == InputHumain)
 			{
 				HumainGagne = true;
+                Destroy(GameObject.FindGameObjectWithTag("Zombie"));
+                HumainGagne = false;
 				GO = false;
 			}
 
