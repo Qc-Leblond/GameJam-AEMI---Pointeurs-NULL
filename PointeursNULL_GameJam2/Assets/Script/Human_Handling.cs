@@ -55,9 +55,9 @@ public class Human_Handling : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collide)
     {
-        if (collide.gameObject.layer == 12 && !collide.GetComponent<Character_Controller>().transportObjective)
+        if (collide.gameObject.layer == 12 && collide.GetComponent<Human_Handling>().Incapacitated && !GetComponent<Character_Controller>().transportObjective)
         {
-            collide.GetComponent<Character_Controller>().transportObjective = true;
+            GetComponent<Character_Controller>().transportObjective = true;
             transform.parent = collide.transform;
         }
         
