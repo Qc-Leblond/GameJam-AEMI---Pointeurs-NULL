@@ -147,17 +147,17 @@ public class Game_Main : MonoBehaviour
 
     private void PotentialObjectiveCoordinates()
     {
-     //   ObjectiveLocation.Add(new Vector3(0, 1, 0));
+        //   ObjectiveLocation.Add(new Vector3(0, 1, 0));
         //ObjectiveLocation.Add(new Vector3(0, 27.5f, 0));
-        ObjectiveLocation.Add(new Vector3(-24, 41, 0));
-        ObjectiveLocation.Add(new Vector3(24, 41, 0));
-        ObjectiveLocation.Add(new Vector3(24, 101, 0));
-        ObjectiveLocation.Add(new Vector3(-24, 101, 0));
-        ObjectiveLocation.Add(new Vector3(0, 71, 0));
-        ObjectiveLocation.Add(new Vector3(72, 101, 0));
-        ObjectiveLocation.Add(new Vector3(-72, 101, 0));
-        ObjectiveLocation.Add(new Vector3(-48, 71, 0));
-        ObjectiveLocation.Add(new Vector3(48, 71, 0));
+        ObjectiveLocation.Add(new Vector3(-24, 73.4f, 0));
+        ObjectiveLocation.Add(new Vector3(24, 73.4f, 0));
+        ObjectiveLocation.Add(new Vector3(24, 193.4f, 0));
+        ObjectiveLocation.Add(new Vector3(-24, 193.4f, 0));
+        ObjectiveLocation.Add(new Vector3(0, 133.4f, 0));
+        ObjectiveLocation.Add(new Vector3(72, 173.4f, 0));
+        ObjectiveLocation.Add(new Vector3(-72, 173.4f, 0));
+        ObjectiveLocation.Add(new Vector3(-48, 133.4f, 0));
+        ObjectiveLocation.Add(new Vector3(48, 133.4f, 0));
     }
 	
     private void ChangeControlZombie()
