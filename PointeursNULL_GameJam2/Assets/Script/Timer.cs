@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Timer : MonoBehaviour {
+public class Timer : MonoBehaviour 
+{
     private bool TimerActive = false;
 	private float timeLeft;
     private float timeStart = 20;
 	private int ZPoints = 0;
 	private int HPoints = 0;
 
-	// Update is called once per frame
 	void Update ()
 	{
         if (TimerActive)

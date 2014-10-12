@@ -1,10 +1,8 @@
 fileFormatVersion: 2
-guid: e62ce779469040d41ba412c6ee30ebe1
+guid: fd2f7075245cc2f42b9dd2cad9a50075
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - BoutonCarre: {fileID: 100000, guid: f9a57cad498ca6f4c91d2724cdc068f8, type: 2}
-  - Carre: {fileID: 21300000, guid: 514d17e28d12898418deba242944212d, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
