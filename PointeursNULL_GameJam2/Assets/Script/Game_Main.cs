@@ -110,7 +110,7 @@ public class Game_Main : MonoBehaviour
     {
         if (LimitZombie >= ZombieList.Count)
         {
-            GameObject ZombieObject = Instantiate(Zombie, new Vector3(-60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+            GameObject ZombieObject = Instantiate(Zombie, new Vector3(-75f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             ZombieList.Add(ZombieObject);
 //            Debug.Log(ZombieList);
                 ChangeControlZombie();
@@ -122,7 +122,7 @@ public class Game_Main : MonoBehaviour
     {
         if (LimitHuman >= HumanList.Count)
         {
-            GameObject HumanObject = Instantiate(Human, new Vector3(60f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+            GameObject HumanObject = Instantiate(Human, new Vector3(76f, 4.3f, 0), Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
             HumanObject.GetComponent<Character_Controller>().isHuman = true;
             HumanList.Add(HumanObject);
             ChangeControlHuman();
