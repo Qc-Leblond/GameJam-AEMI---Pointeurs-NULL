@@ -23,4 +23,11 @@ public class Human_Handling : MonoBehaviour
     public void GetBitten() { Incapacitated = true; }
     public bool isIncapacitated() { return Incapacitated; }
     public void RemoveTurnToZombie() { TurnToZombie -= 1; }
+
+	void OnEnterCollision2D(Collision2D other)
+	{
+		Debug.Log ("**");
+		if (other.transform.tag == "Zombie") Main.GetComponent<Game_Main> ().StartCombat (other.gameObject, gameObject);
+		
+	}
 }

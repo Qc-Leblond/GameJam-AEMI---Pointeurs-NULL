@@ -10,7 +10,7 @@ public class Game_Main : MonoBehaviour
 
     public GameObject Zombie;
     public GameObject Human;
-    public GameObject Objective;
+	public GameObject Objective;
     public GameObject camera;
 
     private List<GameObject> HumanList = new List<GameObject>();
@@ -215,4 +215,9 @@ public class Game_Main : MonoBehaviour
         GameObject NewZombie = Instantiate(Zombie, Pos, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
         ZombieList.Add(NewZombie);
     }
+
+	public void StartCombat(GameObject Zombie, GameObject Human)
+	{
+		Debug.Log ("Combat between " + Zombie.name + " and " + Human.name);
+	}
 }
